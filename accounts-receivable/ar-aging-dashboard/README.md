@@ -19,8 +19,10 @@ This project simulates a small portfolio of customer invoices with different iss
 - customer-level summary
 - overdue concentration review
 - dashboard-ready summary notes
+- formula-driven Excel dashboard with KPI cards, charts, exception flags, and reconciliation controls
 
 ## Files In This Project
+- [AR_Aging_Dashboard_2026-06-30.xlsx](./AR_Aging_Dashboard_2026-06-30.xlsx)
 - [sample_ar_aging_data.csv](./sample_ar_aging_data.csv)
 - [aged_invoice_detail_asof_2026-06-30.csv](./aged_invoice_detail_asof_2026-06-30.csv)
 - [customer_aging_summary_asof_2026-06-30.csv](./customer_aging_summary_asof_2026-06-30.csv)
@@ -32,13 +34,13 @@ This project simulates a small portfolio of customer invoices with different iss
 - Identified high-risk receivables, customer concentration, and balances requiring collection follow-up.
 - Created outputs that mirror the type of support schedules used in AR review and cash flow monitoring.
 
-## Suggested Excel Build
-1. Import the invoice dataset.
-2. Add formulas to calculate `days past due`.
-3. Classify invoices into aging buckets.
-4. Create a pivot table summarizing balances by customer and aging bucket.
-5. Add charts for overdue concentration and total balance by aging category.
-6. Highlight high-risk or old balances using conditional formatting.
+## Excel Dashboard Features
+1. Editable `Source Data` input table with validation and room for additional invoices.
+2. Formula-driven invoice aging, risk flags, and exception notes.
+3. Customer-level aging and collection-priority summary.
+4. Dashboard KPIs for total AR, overdue exposure, 90+ balances, and exceptions.
+5. Charts for aging mix and top overdue customers.
+6. Reconciliation checks with an overall `PASS` / `FAIL` model status.
 
 ## Skills Demonstrated
 - Accounts receivable review
