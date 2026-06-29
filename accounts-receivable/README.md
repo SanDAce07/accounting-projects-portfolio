@@ -2,9 +2,13 @@
 
 Projects in this section focus on practical AR workflows, customer balances, payment application, aging analysis, and reconciliation support.
 
+## Active Projects
+- [AR Aging Dashboard](./ar-aging-dashboard/README.md)
+  Excel-style aging analysis project with invoice-level data, aging buckets, and management reporting.
+- [Bank Reconciliation Analyzer](./bank-reconciliation-analyzer/README.md)
+  Reconciliation project focused on matching book records to bank activity and documenting reconciling items.
+
 ## Planned Projects
-- **AR Aging Dashboard**
-  Excel-based aging tracker with 0-30, 31-60, 61-90, and 90+ day buckets.
 - **Cash Application Tracker**
   Tracks invoices, payments, credits, short pays, and unapplied cash.
 - **Customer Balance Reconciliation**
