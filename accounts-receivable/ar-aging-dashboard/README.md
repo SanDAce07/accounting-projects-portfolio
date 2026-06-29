@@ -13,16 +13,24 @@ Build a recruiter-friendly AR project that demonstrates how I can:
 ## Project Scenario
 This project simulates a small portfolio of customer invoices with different issue dates, due dates, statuses, and balances. The goal is to turn raw invoice data into a usable aging dashboard for review by accounting or management.
 
-## Deliverables
+## Completed Deliverables
 - invoice-level aging dataset
 - aging bucket calculations (`Current`, `1-30`, `31-60`, `61-90`, `90+`)
 - customer-level summary
 - overdue concentration review
-- dashboard visuals for reporting and follow-up
+- dashboard-ready summary notes
 
 ## Files In This Project
 - [sample_ar_aging_data.csv](./sample_ar_aging_data.csv)
+- [aged_invoice_detail_asof_2026-06-30.csv](./aged_invoice_detail_asof_2026-06-30.csv)
+- [customer_aging_summary_asof_2026-06-30.csv](./customer_aging_summary_asof_2026-06-30.csv)
+- [dashboard-summary.md](./dashboard-summary.md)
 - [project-notes.md](./project-notes.md)
+
+## Portfolio Highlights
+- Converted raw invoice data into a structured aging analysis as of **2026-06-30**.
+- Identified high-risk receivables, customer concentration, and balances requiring collection follow-up.
+- Created outputs that mirror the type of support schedules used in AR review and cash flow monitoring.
 
 ## Suggested Excel Build
 1. Import the invoice dataset.
