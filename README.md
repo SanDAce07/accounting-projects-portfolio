@@ -32,17 +32,21 @@ These projects are drawn directly from my coursework, resume experience, and cur
 - [Templates](./templates/README.md)
   Reusable accounting, audit, and reconciliation templates.
 
+## Featured Projects Built In This Repository
+- [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md)
+- [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md)
+
 ## Current and Planned Projects
 
 ### Accounts Receivable Projects
 See: [accounts-receivable](./accounts-receivable/README.md)
-- **AR Aging Dashboard**
+- [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md)
   Build an Excel-based aging tracker with 0-30, 31-60, 61-90, and 90+ buckets, summary pivots, and reporting visuals.
 - **Cash Application Tracker**
   Track customer invoices, payments, credits, and unapplied cash scenarios.
 - **Customer Balance Reconciliation Project**
   Reconcile subledger balances against summary control totals and supporting records.
-- **Bank Reconciliation Analyzer**
+- [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md)
   Match transactions, identify timing differences, and document reconciling items.
 
 ### QuickBooks Simulations
