@@ -1,6 +1,6 @@
 # Bank Reconciliation Analyzer
 
-A practical bank reconciliation example for month-end close that demonstrates matching bank statement activity to book cash records, identifying reconciling items, and producing clear documentation and journal entries.
+A practical bank reconciliation example for month-end close that demonstrates matching bank statement activity to book cash records, identifying reconciling items, and producing clear documentation.
 
 ## Table of Contents
 - [Project Goal](#project-goal)
@@ -26,7 +26,7 @@ Demonstrate the ability to:
 - Support month-end close and ensure cash accuracy
 
 ## Project Scenario
-This project simulates reconciliation of a company's cash ledger to a bank statement for a single month (June 2026). The objective is to match transactions that appear in both records, identify timing differences and bank-only items, and prepare the adjusted cash balance and any journal entries required before close.
+This project simulates reconciliation of a company's cash ledger to a bank statement for a single month (June 2026). The objective is to match transactions that appear in both records, identify timing differences, and produce a complete reconciliation workbook for month-end close.
 
 ## Completed Deliverables
 - book-side cash activity file
@@ -39,14 +39,14 @@ This project simulates reconciliation of a company's cash ledger to a bank state
 - reconciliation workbook (Excel)
 
 ## Files In This Project
-- sample_book_transactions.csv — book-side transactions used for reconciliation
-- sample_bank_statement.csv — bank statement activity for the period
-- matched_transactions.csv — result of automated/manual matching
-- reconciling_items.csv — outstanding items and bank-only items
-- adjusted_cash_summary.md — summary of the adjusted cash balance
-- journal_entries.md — suggested journal entries for book updates
-- reconciliation-notes.md — investigation notes and follow-ups
-- bank-reconciliation-workbook.xlsx — workbook containing sheets for matching, reconciling items, and summary
+- [`sample_book_transactions.csv`](sample_book_transactions.csv) — book-side transactions used for reconciliation
+- [`sample_bank_statement.csv`](sample_bank_statement.csv) — bank statement activity for the period
+- [`matched_transactions.csv`](matched_transactions.csv) — result of automated/manual matching
+- [`reconciling_items.csv`](reconciling_items.csv) — outstanding items and bank-only items
+- [`adjusted_cash_summary.md`](adjusted_cash_summary.md) — summary of the adjusted cash balance
+- [`journal_entries.md`](journal_entries.md) — suggested journal entries for book updates
+- [`reconciliation-notes.md`](reconciliation-notes.md) — investigation notes and follow-ups
+- [`bank-reconciliation-workbook.xlsx`](bank-reconciliation-workbook.xlsx) — workbook containing sheets for matching, reconciling items, and summary
 
 ## Prerequisites
 - Excel (or equivalent) to open the workbook, or Python 3.8+ with pandas if you prefer an automated approach.
@@ -63,17 +63,17 @@ Expected columns (both CSVs):
 Note: If your book uses separate debit/credit columns, convert to a single signed amount column before importing.
 
 ## Suggested workflow / How to use
-1. Open `bank-reconciliation-workbook.xlsx` in Excel:
-   - Import `sample_book_transactions.csv` to the Book sheet.
-   - Import `sample_bank_statement.csv` to the Bank sheet.
+1. Open [`bank-reconciliation-workbook.xlsx`](bank-reconciliation-workbook.xlsx) in Excel:
+   - Import [`sample_book_transactions.csv`](sample_book_transactions.csv) to the Book sheet.
+   - Import [`sample_bank_statement.csv`](sample_bank_statement.csv) to the Bank sheet.
 2. Run the workbook's matching sheet (if formulas/macros are present) or:
    - Sort both datasets by date and amount.
    - Perform automatic matching on exact date + amount.
    - Flag near-matches or duplicates for manual review.
 3. Review unmatched items:
    - Classify as deposit in transit, outstanding check, bank fee, bank error, or missing book entry.
-4. Prepare journal entries for book-side adjustments (see `journal_entries.md`).
-5. Produce the adjusted cash summary and document the reconciliation in `reconciliation-notes.md`.
+4. Prepare journal entries for book-side adjustments (see [`journal_entries.md`](journal_entries.md)).
+5. Produce the adjusted cash summary and document the reconciliation in [`reconciliation-notes.md`](reconciliation-notes.md).
 
 Optional: Automate with Python
 - Use pandas to read CSVs and merge on `date` and `amount` (or use nearest-date matching with tolerance).
@@ -89,7 +89,7 @@ Optional: Automate with Python
 - Reconciled the June 2026 cash activity to an adjusted cash balance of **$67,953.50**.
 - Identified one deposit in transit and two outstanding book-side disbursements as timing differences.
 - Identified three bank-only items that require book entries before close.
-(See `adjusted_cash_summary.md` and `reconciling_items.csv` for detailed line items.)
+(See [`adjusted_cash_summary.md`](adjusted_cash_summary.md) and [`reconciling_items.csv`](reconciling_items.csv) for detailed line items.)
 
 ## What to look for / common reconciling items
 - Outstanding checks: checks recorded in books but not yet cleared by the bank.
@@ -108,4 +108,4 @@ Optional: Automate with Python
 - Author / maintainer: SanDAce07 (see repo contact or GitHub profile)
 
 ## License
-Specify the project license (e.g., MIT). If none is intended, add a brief note: “All content in this folder is provided for educational/demo purposes.”
+Specify the project license (e.g., MIT). If none is intended, add a brief note: "All content in this folder is provided for educational/demo purposes."
