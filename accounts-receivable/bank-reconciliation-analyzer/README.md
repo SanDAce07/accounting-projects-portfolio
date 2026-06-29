@@ -11,7 +11,7 @@ Demonstrate the ability to:
 - support month-end close and cash accuracy
 
 ## Project Scenario
-This project simulates a month-end reconciliation between a company cash ledger and a bank statement. The objective is to identify which transactions match, which require adjustment, and which remain as timing differences.
+This project simulates a month-end reconciliation between a company cash ledger and a bank statement. The objective is to identify which transactions match, which require adjustment, and which remain unmatched, following a standard bank reconciliation process.
 
 ## Completed Deliverables
 - book-side cash activity file
@@ -30,7 +30,7 @@ This project simulates a month-end reconciliation between a company cash ledger 
 - [adjusted_cash_summary.md](./adjusted_cash_summary.md)
 - [journal_entries.md](./journal_entries.md)
 - [reconciliation-notes.md](./reconciliation-notes.md)
-- bank-reconciliation-workbook.xlsx
+- [bank-reconciliation-workbook.xlsx](./bank-reconciliation-workbook.xlsx)
 
 ## Reconciliation Outcome
 - Reconciled the June 2026 cash activity to an adjusted cash balance of **$67,953.50**.
