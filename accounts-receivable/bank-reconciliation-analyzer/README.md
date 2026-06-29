@@ -30,6 +30,7 @@ This project simulates a month-end reconciliation between a company cash ledger 
 - [adjusted_cash_summary.md](./adjusted_cash_summary.md)
 - [journal_entries.md](./journal_entries.md)
 - [reconciliation-notes.md](./reconciliation-notes.md)
+- bank-reconciliation-workbook.xlsx
 
 ## Reconciliation Outcome
 - Reconciled the June 2026 cash activity to an adjusted cash balance of **$67,953.50**.
