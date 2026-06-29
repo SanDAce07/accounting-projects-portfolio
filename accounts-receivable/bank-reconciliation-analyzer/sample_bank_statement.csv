@@ -1,0 +1,14 @@
+transaction_date,description,bank_reference,amount,type
+2026-06-01,Beginning balance,BALANCE,25000.00,Balance
+2026-06-03,Deposit credit,BNK-5001,18250.00,Deposit
+2026-06-04,Check cleared 1045,BNK-5002,-3200.00,Check
+2026-06-06,ACH debit utilities,BNK-5003,-465.00,ACH
+2026-06-08,Deposit credit,BNK-5004,14220.00,Deposit
+2026-06-10,Payroll ACH,BNK-5005,-8750.00,ACH
+2026-06-12,Check cleared 1046,BNK-5006,-1225.00,Check
+2026-06-15,Deposit credit,BNK-5007,8800.00,Deposit
+2026-06-18,Card purchase,BNK-5008,-675.00,Debit Card
+2026-06-21,Deposit credit,BNK-5009,13450.00,Deposit
+2026-06-25,Bank service charge,BNK-5010,-25.00,Fee
+2026-06-27,Interest earned,BNK-5011,18.50,Interest
+2026-06-30,NSF customer payment reversed,BNK-5012,-600.00,NSF
