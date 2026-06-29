@@ -1,0 +1,17 @@
+status,book_transaction_date,book_description,book_reference,book_amount,bank_transaction_date,bank_description,bank_reference,bank_amount,match_basis,reconciliation_note
+Matched,2026-06-01,Beginning balance,BALANCE,25000.00,2026-06-01,Beginning balance,BALANCE,25000.00,Exact date and amount,Opening balance agrees
+Matched,2026-06-03,Customer payment - Acadia Health Partners,RCPT-201,18250.00,2026-06-03,Deposit credit,BNK-5001,18250.00,Exact date and amount,Customer receipt cleared bank
+Matched,2026-06-04,Office rent payment,CHK-1045,-3200.00,2026-06-04,Check cleared 1045,BNK-5002,-3200.00,Amount and cleared check number,Cash disbursement cleared bank
+Matched,2026-06-06,Utility payment,ACH-882,-465.00,2026-06-06,ACH debit utilities,BNK-5003,-465.00,Exact date and amount,ACH payment cleared bank
+Matched,2026-06-08,Customer payment - Evergreen Medical Labs,RCPT-202,14220.00,2026-06-08,Deposit credit,BNK-5004,14220.00,Exact date and amount,Customer receipt cleared bank
+Matched,2026-06-10,Payroll disbursement,PAY-610,-8750.00,2026-06-10,Payroll ACH,BNK-5005,-8750.00,Exact date and amount,Payroll cleared bank
+Matched,2026-06-12,Insurance payment,CHK-1046,-1225.00,2026-06-12,Check cleared 1046,BNK-5006,-1225.00,Amount and cleared check number,Cash disbursement cleared bank
+Matched,2026-06-15,Customer payment - Harbor Energy Co.,RCPT-203,8800.00,2026-06-15,Deposit credit,BNK-5007,8800.00,Exact date and amount,Customer receipt cleared bank
+Matched,2026-06-18,Supplies purchase,DBT-410,-675.00,2026-06-18,Card purchase,BNK-5008,-675.00,Exact date and amount,Card purchase cleared bank
+Matched,2026-06-21,Customer payment - North Delta Equipment,RCPT-204,13450.00,2026-06-21,Deposit credit,BNK-5009,13450.00,Exact date and amount,Customer receipt cleared bank
+Book Only,2026-06-23,Equipment repair,CHK-1047,-980.00,,,,,Recorded in books only at period end,Outstanding check
+Book Only,2026-06-26,Merchant fee settlement,FEE-626,-65.00,,,,,Recorded in books only at period end,Assumed pending disbursement
+Book Only,2026-06-28,Deposit made late in day,DEP-628,4200.00,,,,,Recorded in books only at period end,Deposit in transit
+Bank Only,,,,,2026-06-25,Bank service charge,BNK-5010,-25.00,Recorded on bank statement only,Book journal entry required
+Bank Only,,,,,2026-06-27,Interest earned,BNK-5011,18.50,Recorded on bank statement only,Book journal entry required
+Bank Only,,,,,2026-06-30,NSF customer payment reversed,BNK-5012,-600.00,Recorded on bank statement only,Reverse customer receipt or reopen receivable
