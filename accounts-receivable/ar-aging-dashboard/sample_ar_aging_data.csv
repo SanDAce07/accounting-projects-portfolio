@@ -1,0 +1,17 @@
+customer,invoice_number,invoice_date,due_date,balance,status,payment_method
+Acadia Health Partners,INV-1001,2026-03-15,2026-04-14,18250.00,Open,ACH
+Acadia Health Partners,INV-1002,2026-02-08,2026-03-10,22400.00,Open,Check
+Bayou Industrial Supply,INV-1003,2026-01-05,2026-02-04,31750.00,Open,Wire
+Crescent Retail Group,INV-1004,2026-05-20,2026-06-19,9600.00,Open,Credit Card
+Delta Municipal Services,INV-1005,2025-12-20,2026-01-19,48120.00,Open,ACH
+Evergreen Medical Labs,INV-1006,2026-04-11,2026-05-11,14220.00,Open,Check
+Frontier Logistics,INV-1007,2026-03-31,2026-04-30,12500.00,Open,Wire
+Gulf Coast Manufacturing,INV-1008,2025-11-18,2025-12-18,59200.00,Open,ACH
+Harbor Energy Co.,INV-1009,2026-05-08,2026-06-07,8800.00,Open,Credit Card
+Ivory Tech Consulting,INV-1010,2026-02-01,2026-03-03,17110.00,Open,Check
+Jefferson Community Care,INV-1011,2025-12-30,2026-01-29,26500.00,Open,ACH
+Keystone Distribution,INV-1012,2026-03-20,2026-04-19,-2400.00,Open,Credit Memo
+Lafayette Public Works,INV-1013,2026-04-28,,11200.00,Open,ACH
+Magnolia Property Group,INV-1014,2026-04-21,2026-05-21,0.00,Closed,Wire
+North Delta Equipment,INV-1015,2026-05-12,2026-06-11,13450.00,Partial,ACH
+Orchid Wholesale,INV-1016,2026-01-26,2026-02-25,20875.00,Open,Check
