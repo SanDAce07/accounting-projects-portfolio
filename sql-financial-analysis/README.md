@@ -1,16 +1,54 @@
 # SQL Financial Analysis
 
-This section focuses on using SQL and structured datasets for accounting and financial analysis projects.
+SQL-based accounting and financial analysis project demonstrating practical data querying skills for AR aging, invoice variance, GL ledger analysis, and DSO calculation.
 
-## Planned Projects
-- **Relational Database & SQL Analytics Project**
-- **Invoice and Payment Variance Analysis**
-- **Ledger Trend Analysis**
-- **Customer Balance Query Project**
+## Project Files
 
-## Focus Areas
-- extracting structured accounting data
-- reconciliation support
-- overdue invoice analysis
-- balance trend reporting
-- variance investigation
+| File | Description |
+| --- | --- |
+| [schema-and-queries.sql](./schema-and-queries.sql) | Full schema + sample data + 8 analytical queries |
+
+## Schema Overview
+
+Five tables used in this project:
+
+```
+customers       — customer master with credit limits and segments
+invoices        — invoice-level AR data with status and due dates
+payments        — payment records linked to invoices
+gl_accounts     — chart of accounts
+journal_entries — double-entry GL transactions by period
+```
+
+## Queries Included
+
+| # | Query | Purpose |
+| --- | --- | --- |
+| 1 | AR Aging as of Date | Classifies all open invoices into aging buckets |
+| 2 | Customer AR Balance Summary | Summarizes open balance and overdue exposure per customer |
+| 3 | Invoice and Payment Variance | Shows invoice amounts, payments applied, and open balance |
+| 4 | Invoices Exceeding Credit Limit | Flags customers whose open AR exceeds approved credit |
+| 5 | GL Account Balances by Period | Produces a trial-balance-style view from journal entries |
+| 6 | Ledger Trend — Revenue vs. Expense | Calculates net income by period from GL data |
+| 7 | Days Sales Outstanding (DSO) | Computes DSO from AR and revenue totals |
+| 8 | High-Risk Customer Concentration | Flags customers representing >20% of total AR |
+
+## How to Run
+
+1. Open any SQL client (PostgreSQL, DBeaver, pgAdmin, or SQLiteOnline).
+2. Run the `CREATE TABLE` and `INSERT` blocks to set up the schema and sample data.
+3. Run individual queries to see results. All queries are self-contained and labeled.
+
+> The schema uses PostgreSQL syntax (`SERIAL`, `DATE` casting with `::DATE`). For SQLite, replace `SERIAL` with `INTEGER PRIMARY KEY AUTOINCREMENT` and use `DATE('2026-06-30')` instead of `'2026-06-30'::DATE`.
+
+## Skills Demonstrated
+- Relational database design for accounting data
+- AR aging logic in SQL (`CASE WHEN` bucketing)
+- Aggregations with `GROUP BY`, `HAVING`, `SUM`, `COUNT`
+- LEFT JOINs for invoice-to-payment variance
+- CTE-based calculations (DSO, concentration risk)
+- Period-based GL analysis and trend reporting
+
+## Related Work
+- [AR Aging Dashboard](../accounts-receivable/ar-aging-dashboard/README.md)
+- [Aging Report Analyzer (Python)](https://github.com/SanDAce07/grc-audit-toolkit/blob/main/audit-scripts/aging-report-analyzer.py)
