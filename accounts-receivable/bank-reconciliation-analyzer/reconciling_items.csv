@@ -1,0 +1,7 @@
+item_id,source_side,transaction_date,description,reference,amount,reconciling_item_type,reconciliation_treatment,journal_entry_required,follow_up
+R1,Book,2026-06-23,Equipment repair,CHK-1047,-980.00,Outstanding check,Subtract 980.00 from bank balance,No,Confirm check clears in next statement
+R2,Book,2026-06-26,Merchant fee settlement,FEE-626,-65.00,Outstanding disbursement,Subtract 65.00 from bank balance,No,Confirm settlement clears after period end
+R3,Book,2026-06-28,Deposit made late in day,DEP-628,4200.00,Deposit in transit,Add 4200.00 to bank balance,No,Trace deposit to next bank statement
+R4,Bank,2026-06-25,Bank service charge,BNK-5010,-25.00,Bank-only service charge,Subtract 25.00 from book balance,Yes,Record bank fee expense
+R5,Bank,2026-06-27,Interest earned,BNK-5011,18.50,Bank-only interest credit,Add 18.50 to book balance,Yes,Record interest income
+R6,Bank,2026-06-30,NSF customer payment reversed,BNK-5012,-600.00,Bank-only NSF reversal,Subtract 600.00 from book balance,Yes,Reopen receivable and contact customer
