@@ -72,7 +72,7 @@ INSERT INTO customers (customer_name, segment, credit_limit) VALUES
 ('Jefferson Community Care', 'Healthcare',     90000);
 
 INSERT INTO invoices (customer_id, invoice_number, invoice_date, due_date, amount, status, payment_method) VALUES
-(1,  'INV-1001', '2026-03-15', '2026-04-14',  18250.00, 'Open',    'ACH'),
+(1,  'INV-1001', '2026-03-15', '2026-04-14',  18250.00, 'Paid',    'ACH'),
 (1,  'INV-1002', '2026-02-08', '2026-03-10',  22400.00, 'Open',    'Check'),
 (2,  'INV-1003', '2026-01-05', '2026-02-04',  31750.00, 'Open',    'Wire'),
 (3,  'INV-1004', '2026-05-20', '2026-06-19',   9600.00, 'Open',    'Credit Card'),
@@ -84,9 +84,12 @@ INSERT INTO invoices (customer_id, invoice_number, invoice_date, due_date, amoun
 (9,  'INV-1010', '2026-02-01', '2026-03-03',  17110.00, 'Open',    'Check'),
 (10, 'INV-1011', '2025-12-30', '2026-01-29',  26500.00, 'Open',    'ACH'),
 (6,  'INV-1012', '2026-03-20', '2026-04-19',  12000.00, 'Partial', 'Wire'),
-(3,  'INV-1013', '2026-05-12', '2026-06-11',  13450.00, 'Open',    'ACH');
+(3,  'INV-1013', '2026-05-12', '2026-06-11',  13450.00, 'Open',    'ACH'),
+(4,  'INV-1014', '2026-06-12', '2026-07-12',  75000.00, 'Open',    'ACH'),
+(1,  'INV-1015', '2026-06-30', '2026-06-30',    600.00, 'Open',    'ACH');
 
 INSERT INTO payments (invoice_id, payment_date, amount_paid, reference) VALUES
+(1,  '2026-06-03', 18250.00, 'RCPT-201'),
 (6,  '2026-06-08', 14220.00, 'RCPT-202'),
 (9,  '2026-06-15',  8800.00, 'RCPT-203'),
 (12, '2026-06-21',  9600.00, 'RCPT-204-PARTIAL');
@@ -102,18 +105,29 @@ INSERT INTO gl_accounts (account_code, account_name, account_type) VALUES
 ('5020', 'Rent Expense',                'Expense'),
 ('5030', 'Utilities Expense',           'Expense'),
 ('5040', 'Bank Fee Expense',            'Expense'),
-('7010', 'Interest Income',             'Revenue');
+('7010', 'Interest Income',             'Revenue'),
+('3000', 'Opening Equity',              'Equity');
 
 INSERT INTO journal_entries (entry_date, account_id, description, debit, credit, period) VALUES
 ('2026-06-01', 1,  'Opening cash balance',              25000.00,     0.00, '2026-06'),
+('2026-06-01', 2,  'Opening AR balance',                293900.00,     0.00, '2026-06'),
+('2026-06-01', 12, 'Opening equity',                         0.00, 318900.00, '2026-06'),
 ('2026-06-03', 1,  'Customer payment - Acadia',         18250.00,     0.00, '2026-06'),
 ('2026-06-03', 2,  'Customer payment - Acadia',             0.00, 18250.00, '2026-06'),
-('2026-06-04', 5,  'Office rent payment',                   0.00,  3200.00, '2026-06'),
+('2026-06-04', 8,  'Office rent payment',                3200.00,     0.00, '2026-06'),
 ('2026-06-04', 1,  'Office rent payment',                   0.00,  3200.00, '2026-06'),
 ('2026-06-06', 9,  'Utility payment',                     465.00,     0.00, '2026-06'),
 ('2026-06-06', 1,  'Utility payment',                       0.00,   465.00, '2026-06'),
-('2026-06-10', 6,  'Payroll disbursement',               8750.00,     0.00, '2026-06'),
+('2026-06-08', 1,  'Customer payment - Evergreen',      14220.00,     0.00, '2026-06'),
+('2026-06-08', 2,  'Customer payment - Evergreen',          0.00, 14220.00, '2026-06'),
+('2026-06-10', 7,  'Payroll disbursement',               8750.00,     0.00, '2026-06'),
 ('2026-06-10', 1,  'Payroll disbursement',                   0.00,  8750.00, '2026-06'),
+('2026-06-12', 2,  'June services billed - Delta',      75000.00,     0.00, '2026-06'),
+('2026-06-12', 6,  'June services billed - Delta',          0.00, 75000.00, '2026-06'),
+('2026-06-15', 1,  'Customer payment - Harbor',          8800.00,     0.00, '2026-06'),
+('2026-06-15', 2,  'Customer payment - Harbor',             0.00,  8800.00, '2026-06'),
+('2026-06-21', 1,  'Partial customer payment - Frontier', 9600.00,    0.00, '2026-06'),
+('2026-06-21', 2,  'Partial customer payment - Frontier',    0.00, 9600.00, '2026-06'),
 ('2026-06-25', 10, 'Bank service charge',                   25.00,    0.00, '2026-06'),
 ('2026-06-25', 1,  'Bank service charge',                    0.00,   25.00, '2026-06'),
 ('2026-06-27', 1,  'Interest earned',                       18.50,    0.00, '2026-06'),
@@ -127,40 +141,64 @@ INSERT INTO journal_entries (entry_date, account_id, description, debit, credit,
 -- Returns all open invoices with aging bucket classification.
 -- Change '2026-06-30' to any as-of date.
 
+WITH invoice_balances AS (
+    SELECT
+        i.invoice_id,
+        i.customer_id,
+        i.invoice_number,
+        i.invoice_date,
+        i.due_date,
+        GREATEST(i.amount - COALESCE(SUM(p.amount_paid), 0), 0) AS open_balance
+    FROM invoices i
+    LEFT JOIN payments p ON i.invoice_id = p.invoice_id
+    WHERE i.status IN ('Open', 'Partial')
+    GROUP BY i.invoice_id, i.customer_id, i.invoice_number, i.invoice_date, i.due_date, i.amount
+)
 SELECT
     c.customer_name,
-    i.invoice_number,
-    i.invoice_date,
-    i.due_date,
-    i.amount,
-    ('2026-06-30'::DATE - i.due_date) AS days_past_due,
+    ib.invoice_number,
+    ib.invoice_date,
+    ib.due_date,
+    ib.open_balance,
+    ('2026-06-30'::DATE - ib.due_date) AS days_past_due,
     CASE
-        WHEN i.due_date > '2026-06-30'::DATE                      THEN 'Current'
-        WHEN ('2026-06-30'::DATE - i.due_date) BETWEEN 1  AND 30  THEN '1-30'
-        WHEN ('2026-06-30'::DATE - i.due_date) BETWEEN 31 AND 60  THEN '31-60'
-        WHEN ('2026-06-30'::DATE - i.due_date) BETWEEN 61 AND 90  THEN '61-90'
-        WHEN ('2026-06-30'::DATE - i.due_date) > 90               THEN '90+'
-        WHEN i.due_date IS NULL                                    THEN 'Unknown'
+        WHEN ib.due_date IS NULL                                    THEN 'Unknown'
+        WHEN ib.due_date >= '2026-06-30'::DATE                     THEN 'Current'
+        WHEN ('2026-06-30'::DATE - ib.due_date) BETWEEN 1  AND 30  THEN '1-30'
+        WHEN ('2026-06-30'::DATE - ib.due_date) BETWEEN 31 AND 60  THEN '31-60'
+        WHEN ('2026-06-30'::DATE - ib.due_date) BETWEEN 61 AND 90  THEN '61-90'
+        WHEN ('2026-06-30'::DATE - ib.due_date) > 90               THEN '90+'
     END AS aging_bucket
-FROM invoices i
-JOIN customers c ON i.customer_id = c.customer_id
-WHERE i.status IN ('Open', 'Partial')
+FROM invoice_balances ib
+JOIN customers c ON ib.customer_id = c.customer_id
+WHERE ib.open_balance > 0
 ORDER BY days_past_due DESC NULLS LAST;
 
 -- ============================================================
 -- QUERY 2: Customer AR Balance Summary
 -- ============================================================
 
+WITH invoice_balances AS (
+    SELECT
+        i.invoice_id,
+        i.customer_id,
+        i.due_date,
+        GREATEST(i.amount - COALESCE(SUM(p.amount_paid), 0), 0) AS open_balance
+    FROM invoices i
+    LEFT JOIN payments p ON i.invoice_id = p.invoice_id
+    WHERE i.status IN ('Open', 'Partial')
+    GROUP BY i.invoice_id, i.customer_id, i.due_date, i.amount
+)
 SELECT
     c.customer_name,
-    COUNT(i.invoice_id)                                        AS invoice_count,
-    SUM(i.amount)                                              AS total_open_balance,
-    SUM(CASE WHEN i.due_date < '2026-06-30' THEN i.amount
-             ELSE 0 END)                                       AS overdue_balance,
-    MAX('2026-06-30'::DATE - i.due_date)                       AS max_days_past_due
-FROM invoices i
-JOIN customers c ON i.customer_id = c.customer_id
-WHERE i.status IN ('Open', 'Partial')
+    COUNT(ib.invoice_id)                                              AS invoice_count,
+    SUM(ib.open_balance)                                              AS total_open_balance,
+    SUM(CASE WHEN ib.due_date < '2026-06-30' THEN ib.open_balance
+             ELSE 0 END)                                              AS overdue_balance,
+    MAX('2026-06-30'::DATE - ib.due_date)                             AS max_days_past_due
+FROM invoice_balances ib
+JOIN customers c ON ib.customer_id = c.customer_id
+WHERE ib.open_balance > 0
 GROUP BY c.customer_name
 ORDER BY overdue_balance DESC;
 
@@ -185,19 +223,29 @@ GROUP BY c.customer_name, i.invoice_number, i.invoice_date, i.due_date, i.amount
 ORDER BY open_balance DESC;
 
 -- ============================================================
--- QUERY 4: Overdue Invoices Exceeding Credit Limit
+-- QUERY 4: Customers Exceeding Credit Limit
 -- ============================================================
 
+WITH invoice_balances AS (
+    SELECT
+        i.invoice_id,
+        i.customer_id,
+        GREATEST(i.amount - COALESCE(SUM(p.amount_paid), 0), 0) AS open_balance
+    FROM invoices i
+    LEFT JOIN payments p ON i.invoice_id = p.invoice_id
+    WHERE i.status IN ('Open', 'Partial')
+    GROUP BY i.invoice_id, i.customer_id, i.amount
+)
 SELECT
     c.customer_name,
     c.credit_limit,
-    SUM(i.amount) AS total_open_ar,
-    SUM(i.amount) - c.credit_limit AS over_limit_by
-FROM invoices i
-JOIN customers c ON i.customer_id = c.customer_id
-WHERE i.status IN ('Open', 'Partial')
+    SUM(ib.open_balance) AS total_open_ar,
+    SUM(ib.open_balance) - c.credit_limit AS over_limit_by
+FROM invoice_balances ib
+JOIN customers c ON ib.customer_id = c.customer_id
+WHERE ib.open_balance > 0
 GROUP BY c.customer_name, c.credit_limit
-HAVING SUM(i.amount) > c.credit_limit
+HAVING SUM(ib.open_balance) > c.credit_limit
 ORDER BY over_limit_by DESC;
 
 -- ============================================================
@@ -238,16 +286,24 @@ ORDER BY je.period;
 -- ============================================================
 -- DSO = (Total AR / Total Revenue) * Days in Period
 
-WITH ar_total AS (
-    SELECT SUM(amount) AS total_ar
-    FROM invoices
-    WHERE status IN ('Open', 'Partial')
+WITH invoice_balances AS (
+    SELECT
+        i.invoice_id,
+        GREATEST(i.amount - COALESCE(SUM(p.amount_paid), 0), 0) AS open_balance
+    FROM invoices i
+    LEFT JOIN payments p ON i.invoice_id = p.invoice_id
+    WHERE i.status IN ('Open', 'Partial')
+    GROUP BY i.invoice_id, i.amount
+),
+ar_total AS (
+    SELECT SUM(open_balance) AS total_ar
+    FROM invoice_balances
 ),
 revenue_total AS (
     SELECT SUM(credit - debit) AS total_revenue
     FROM journal_entries je
     JOIN gl_accounts a ON je.account_id = a.account_id
-    WHERE a.account_type = 'Revenue'
+    WHERE a.account_code = '4000'
       AND je.period = '2026-06'
 )
 SELECT
@@ -261,17 +317,29 @@ FROM ar_total ar, revenue_total rev;
 -- ============================================================
 -- Customers with overdue balance > 20% of total AR.
 
-WITH total_ar AS (
-    SELECT SUM(amount) AS grand_total FROM invoices WHERE status IN ('Open','Partial')
+WITH invoice_balances AS (
+    SELECT
+        i.invoice_id,
+        i.customer_id,
+        i.due_date,
+        GREATEST(i.amount - COALESCE(SUM(p.amount_paid), 0), 0) AS open_balance
+    FROM invoices i
+    LEFT JOIN payments p ON i.invoice_id = p.invoice_id
+    WHERE i.status IN ('Open', 'Partial')
+    GROUP BY i.invoice_id, i.customer_id, i.due_date, i.amount
+),
+total_ar AS (
+    SELECT SUM(open_balance) AS grand_total
+    FROM invoice_balances
 ),
 customer_ar AS (
     SELECT
         c.customer_name,
-        SUM(i.amount) AS customer_balance,
-        SUM(CASE WHEN i.due_date < '2026-06-30' THEN i.amount ELSE 0 END) AS overdue_balance
-    FROM invoices i
-    JOIN customers c ON i.customer_id = c.customer_id
-    WHERE i.status IN ('Open', 'Partial')
+        SUM(ib.open_balance) AS customer_balance,
+        SUM(CASE WHEN ib.due_date < '2026-06-30' THEN ib.open_balance ELSE 0 END) AS overdue_balance
+    FROM invoice_balances ib
+    JOIN customers c ON ib.customer_id = c.customer_id
+    WHERE ib.open_balance > 0
     GROUP BY c.customer_name
 )
 SELECT

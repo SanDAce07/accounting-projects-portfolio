@@ -7,6 +7,7 @@ SQL-based accounting and financial analysis project demonstrating practical data
 | File | Description |
 | --- | --- |
 | [schema-and-queries.sql](./schema-and-queries.sql) | Full schema + sample data + 8 analytical queries |
+| [validation-tests.sql](./validation-tests.sql) | PostgreSQL assertions for journal balance, AR tie-out, aging completeness, and DSO revenue |
 
 ## Schema Overview
 
@@ -27,7 +28,7 @@ journal_entries — double-entry GL transactions by period
 | 1 | AR Aging as of Date | Classifies all open invoices into aging buckets |
 | 2 | Customer AR Balance Summary | Summarizes open balance and overdue exposure per customer |
 | 3 | Invoice and Payment Variance | Shows invoice amounts, payments applied, and open balance |
-| 4 | Invoices Exceeding Credit Limit | Flags customers whose open AR exceeds approved credit |
+| 4 | Customers Exceeding Credit Limit | Flags customers whose remaining open AR exceeds approved credit |
 | 5 | GL Account Balances by Period | Produces a trial-balance-style view from journal entries |
 | 6 | Ledger Trend — Revenue vs. Expense | Calculates net income by period from GL data |
 | 7 | Days Sales Outstanding (DSO) | Computes DSO from AR and revenue totals |
@@ -38,8 +39,9 @@ journal_entries — double-entry GL transactions by period
 1. Open any SQL client (PostgreSQL, DBeaver, pgAdmin, or SQLiteOnline).
 2. Run the `CREATE TABLE` and `INSERT` blocks to set up the schema and sample data.
 3. Run individual queries to see results. All queries are self-contained and labeled.
+4. In PostgreSQL, run `validation-tests.sql` to confirm the journal balances and the AR subledger ties to the GL.
 
-> The schema uses PostgreSQL syntax (`SERIAL`, `DATE` casting with `::DATE`). For SQLite, replace `SERIAL` with `INTEGER PRIMARY KEY AUTOINCREMENT` and use `DATE('2026-06-30')` instead of `'2026-06-30'::DATE`.
+> PostgreSQL is recommended. For SQLite, replace `SERIAL` with `INTEGER PRIMARY KEY AUTOINCREMENT`, use `DATE('2026-06-30')` instead of `'2026-06-30'::DATE`, and replace `GREATEST(value, 0)` with `MAX(value, 0)`.
 
 ## Skills Demonstrated
 - Relational database design for accounting data
@@ -48,6 +50,7 @@ journal_entries — double-entry GL transactions by period
 - LEFT JOINs for invoice-to-payment variance
 - CTE-based calculations (DSO, concentration risk)
 - Period-based GL analysis and trend reporting
+- Accounting control assertions and automated SQL validation
 
 ## Related Work
 - [AR Aging Dashboard](../accounts-receivable/ar-aging-dashboard/README.md)

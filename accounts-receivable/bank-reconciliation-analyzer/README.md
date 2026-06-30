@@ -108,4 +108,4 @@ Optional: Automate with Python
 - Author / maintainer: SanDAce07 (see repo contact or GitHub profile)
 
 ## License
-Specify the project license (e.g., MIT). If none is intended, add a brief note: "All content in this folder is provided for educational/demo purposes."
+This project is provided under the repository's [MIT License](../../LICENSE).
