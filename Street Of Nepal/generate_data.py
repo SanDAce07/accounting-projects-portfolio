@@ -1,6 +1,11 @@
 import numpy as np
 import pandas as pd
 import json
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 np.random.seed(42)
 
@@ -58,7 +63,7 @@ for dish, card in dishes.items():
         # ---- MATERIAL PRICE (actual $/lb paid) ----
         if dish in ["Chicken Momos", "Veg Thukpa", "Chow Mein (Chicken)", "Lamb Sekuwa"]:
             # RED FLAG 2: suspiciously tight, consistently favorable prices (low real variance)
-            # Real vendor prices should fluctuate ~3-5%; here we simulate ~0.5-0.8%, always favorable
+            # Deliberately tight clustering for the synthetic control-testing scenario.
             noise = np.random.normal(0, 0.004)  # very tight clustering
             actual_price = sp * (1 - 0.018 + noise)  # consistently ~1.8% favorable, barely moves
         else:
@@ -103,11 +108,11 @@ for dish, card in dishes.items():
         })
 
 df = pd.DataFrame(records)
-df.to_csv("data/daily_actuals.csv", index=False)
+df.to_csv(DATA_DIR / "daily_actuals.csv", index=False)
 
-with open("data/standard_cost_cards.json", "w") as f:
+with open(DATA_DIR / "standard_cost_cards.json", "w") as f:
     json.dump(dishes, f, indent=2)
 
 print(df.shape)
 print(df.head(10).to_string())
-print("\nSaved data/daily_actuals.csv and data/standard_cost_cards.json")
+print(f"\nSaved {DATA_DIR / 'daily_actuals.csv'} and {DATA_DIR / 'standard_cost_cards.json'}")

@@ -1,5 +1,7 @@
 # AR Confirmation Simulation
 
+![AR confirmation workpaper preview](../../docs/previews/ar-confirmation-workpaper.png)
+
 A portfolio audit project demonstrating how accounts receivable confirmations are selected, controlled, followed up, and evaluated as substantive audit evidence.
 
 ## Project Goal

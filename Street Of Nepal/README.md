@@ -1,6 +1,8 @@
 # Streets of Nepal — Standard Costing Variance Analysis with Audit Red-Flag Detection
 
-A standard costing and variance analysis project built around a fictional fast-casual
+![Streets of Nepal variance dashboard](../docs/previews/streets-of-nepal-dashboard.png)
+
+A reproducible standard costing and variance analysis project built around a fictional fast-casual
 Nepalese restaurant, designed to demonstrate both core cost accounting mechanics and
 an applied internal-audit lens on top of them.
 
@@ -38,6 +40,23 @@ catch them.
 | `outputs/Streets_of_Nepal_Variance_Analysis.xlsx` | The Excel deliverable |
 | `outputs/Streets_of_Nepal_Audit_Memo.docx` | The Word audit memo deliverable |
 
+All data is synthetic. The workbook and memo can be regenerated from a fresh clone.
+
+## Reproduce the project
+
+From this folder, run:
+
+```bash
+python -m pip install -r requirements.txt
+npm install
+python generate_data.py
+python variance_analysis.py
+python build_excel.py
+npm run build:memo
+```
+
+The scripts create `data/` and `outputs/` automatically. Dependency versions are declared in `requirements.txt` and `package.json`.
+
 ## Methodology
 
 **Variance formulas** (standard cost accounting):
@@ -46,10 +65,10 @@ catch them.
 - Labor Rate Variance = (Actual Rate − Standard Rate) × Actual Hours
 - Labor Efficiency Variance = (Actual Hours − Standard Hours) × Standard Rate
 
-**Red-flag detection tests** (applied on top of the standard variances):
+**Red-flag detection heuristics** (applied on top of the standard variances):
 1. **Price clustering test** — flags dishes where actual material prices are
-   favorable nearly every day with unrealistically low day-to-day spread, a pattern
-   more consistent with smoothed or adjusted data than genuine vendor invoices.
+   favorable nearly every day and fall below the scenario's documented dispersion
+   threshold, prompting comparison to vendor invoices.
 2. **Labor time consistency test** — compares the day-to-day standard deviation of
    recorded labor minutes across dishes; a dish with implausibly low variability
    relative to its peers suggests time entries may not be captured independently
@@ -59,13 +78,15 @@ catch them.
    for the kind of sudden, unexplained improvement associated with period-end
    metric management.
 
+These thresholds are transparent portfolio assumptions designed for the synthetic scenario. They are not industry benchmarks, do not establish statistical significance, and do not prove manipulation. Each flag is a prompt to inspect source documentation and ask follow-up questions.
+
 ## Result
 
-The model surfaced six flags. Four (price clustering) applied across all dishes and
+The model surfaced six follow-up indicators. Four (price clustering) applied across all dishes and
 point to a system/process-level issue in how purchase prices flow into the costing
 system. Two (labor time consistency and period-end shift) were specific to Chicken
-Momos — the dish tied to the kitchen manager's bonus — and converged on the same
-conclusion from independent statistical tests. The full findings, risk ratings, and
+Momos — the dish tied to the kitchen manager's bonus — and raised related follow-up
+questions through separate heuristics. The full findings, risk ratings, and
 recommendations are written up in the audit memo.
 
 ## Tools used
@@ -75,5 +96,5 @@ Excel model · docx (Node.js) for the formal Word memo.
 
 ## Author
 
-Sandesh Lama Tamang— B.B.A. Accounting & Computer Information Systems, University of
+Sandesh Lama Tamang — B.B.A. Accounting & Computer Information Systems, University of
 Louisiana Monroe. Built as part of a GRC / IT audit-focused portfolio.

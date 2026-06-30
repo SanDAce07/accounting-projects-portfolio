@@ -4,11 +4,17 @@ All variance figures are computed via live Excel formulas (not hardcoded),
 per the standard cost cards and daily actuals.
 """
 import pandas as pd
+from pathlib import Path
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment, Border, Side
 from openpyxl.utils import get_column_letter
 from openpyxl.formatting.rule import CellIsRule, ColorScaleRule
 from openpyxl.chart import BarChart, Reference
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+OUTPUT_DIR = BASE_DIR / "outputs"
+OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 FONT_NAME = "Arial"
 BLUE = Font(name=FONT_NAME, color="0000FF", size=10)          # hardcoded inputs
@@ -56,7 +62,7 @@ ws0["B2"] = "Streets of Nepal"
 ws0["B2"].font = Font(name=FONT_NAME, size=22, bold=True, color="2E5395")
 ws0["B3"] = "Standard Costing Variance Analysis — April 2026"
 ws0["B3"].font = Font(name=FONT_NAME, size=13, bold=True)
-ws0["B5"] = "Prepared by: Sandesh Acharya"
+ws0["B5"] = "Prepared by: Sandesh Lama Tamang"
 ws0["B5"].font = BLACK
 ws0["B6"] = "Purpose: Analyze material and labor variances against standard cost cards for four signature dishes, and surface patterns that may indicate operational or control issues."
 ws0["B6"].font = BLACK
@@ -135,7 +141,7 @@ autosize(ws1, {"A": 2, "B": 22, "C": 16, "D": 16, "E": 16, "F": 16, "G": 14, "H"
 # =================================================================
 # SHEET 3: DAILY DATA (raw actuals)
 # =================================================================
-df = pd.read_csv("data/daily_actuals.csv")
+df = pd.read_csv(DATA_DIR / "daily_actuals.csv")
 ws2 = wb.create_sheet("Daily Data")
 ws2.sheet_view.showGridLines = False
 ws2["A1"] = "Daily Actuals — April 2026 (26 operating days x 4 dishes)"
@@ -280,7 +286,8 @@ for i, dish in enumerate(dish_names):
     # reposition: column 2 already orders -- fix mapping below
     ws4.cell(row=r, column=8, value=f"=C{r}+D{r}").font = BOLD_BLACK
     ws4.cell(row=r, column=9, value=f"=E{r}+F{r}").font = BOLD_BLACK
-    for c in range(3, 10):
+    ws4.cell(row=r, column=10, value=f"=H{r}+I{r}").font = BOLD_BLACK
+    for c in range(3, 11):
         ws4.cell(row=r, column=c).number_format = CURRENCY
     ws4.cell(row=r, column=7).number_format = '#,##0'
 
@@ -294,34 +301,36 @@ ws4.cell(row=hdr_row4, column=6, value="LEV")
 ws4.cell(row=hdr_row4, column=7, value="Total Orders")
 ws4.cell(row=hdr_row4, column=8, value="Total Material Var")
 ws4.cell(row=hdr_row4, column=9, value="Total Labor Var")
-style_header_row(ws4, hdr_row4, 8, start_col=2)
+ws4.cell(row=hdr_row4, column=10, value="Grand Total Var")
+style_header_row(ws4, hdr_row4, 9, start_col=2)
 
 last_dash_row = hdr_row4 + len(dish_names)
 ws4.cell(row=last_dash_row + 1, column=2, value="Company Total").font = BOLD_BLACK
-for c in range(3, 10):
+for c in range(3, 11):
     col_l = get_column_letter(c)
     ws4.cell(row=last_dash_row + 1, column=c, value=f"=SUM({col_l}{hdr_row4+1}:{col_l}{last_dash_row})").font = BOLD_BLACK
     ws4.cell(row=last_dash_row + 1, column=c).number_format = CURRENCY if c != 7 else '#,##0'
     ws4.cell(row=last_dash_row + 1, column=c).border = Border(top=Side(style="double"))
 
-for col_letter in ["C", "D", "E", "F", "H", "I"]:
+for col_letter in ["C", "D", "E", "F", "H", "I", "J"]:
     rng = f"{col_letter}{hdr_row4+1}:{col_letter}{last_dash_row}"
     ws4.conditional_formatting.add(rng, CellIsRule(operator="greaterThan", formula=["0"], fill=RED_FILL))
     ws4.conditional_formatting.add(rng, CellIsRule(operator="lessThan", formula=["0"], fill=GREEN_FILL))
 
-for c in range(2, 10):
+for c in range(2, 11):
     for r in range(hdr_row4, last_dash_row + 2):
         ws4.cell(row=r, column=c).border = BORDER
 
-autosize(ws4, {get_column_letter(i): 16 for i in range(1, 10)})
+autosize(ws4, {get_column_letter(i): 16 for i in range(1, 11)})
 ws4.column_dimensions["B"].width = 22
 
 # --- Chart: Grand total variance by dish ---
 chart = BarChart()
 chart.title = "Total Variance by Dish ($)"
+chart.legend = None
 chart.y_axis.title = "Variance ($)"
 chart.x_axis.title = "Dish"
-data_ref = Reference(ws4, min_col=8, max_col=9, min_row=hdr_row4, max_row=last_dash_row)
+data_ref = Reference(ws4, min_col=10, max_col=10, min_row=hdr_row4, max_row=last_dash_row)
 cats_ref = Reference(ws4, min_col=2, min_row=hdr_row4 + 1, max_row=last_dash_row)
 chart.add_data(data_ref, titles_from_data=True)
 chart.set_categories(cats_ref)
@@ -335,7 +344,7 @@ ws4.cell(row=flag_row, column=2, value="Red Flags Identified (see Audit Memo for
 ws4.cell(row=flag_row, column=2).fill = SECTION_FILL
 ws4.merge_cells(start_row=flag_row, start_column=2, end_row=flag_row, end_column=9)
 
-flags_df = pd.read_csv("data/red_flags.csv")
+flags_df = pd.read_csv(DATA_DIR / "red_flags.csv")
 fr = flag_row + 1
 ws4.cell(row=fr, column=2, value="Risk").font = BOLD_BLACK
 ws4.cell(row=fr, column=3, value="Test").font = BOLD_BLACK
@@ -344,17 +353,26 @@ ws4.cell(row=fr, column=5, value="Detail").font = BOLD_BLACK
 ws4.merge_cells(start_row=fr, start_column=5, end_row=fr, end_column=9)
 for c in range(2, 10):
     ws4.cell(row=fr, column=c).fill = SECTION_FILL
+    ws4.cell(row=fr, column=c).border = BORDER
 
 for i, frow in flags_df.iterrows():
     r = fr + 1 + i
     ws4.cell(row=r, column=2, value=frow["risk"]).font = BLACK
     ws4.cell(row=r, column=2).fill = RED_FILL if frow["risk"] == "High" else YELLOW_FILL
     ws4.cell(row=r, column=3, value=frow["test"]).font = BLACK
+    ws4.cell(row=r, column=3).alignment = Alignment(wrap_text=True, vertical="top")
     ws4.cell(row=r, column=4, value=frow["dish"]).font = BLACK
+    ws4.cell(row=r, column=4).alignment = Alignment(wrap_text=True, vertical="top")
     ws4.cell(row=r, column=5, value=frow["detail"]).font = BLACK
     ws4.cell(row=r, column=5).alignment = Alignment(wrap_text=True, vertical="top")
     ws4.merge_cells(start_row=r, start_column=5, end_row=r, end_column=9)
+    for c in range(2, 10):
+        ws4.cell(row=r, column=c).border = BORDER
     ws4.row_dimensions[r].height = 45
 
-wb.save("outputs/Streets_of_Nepal_Variance_Analysis.xlsx")
-print("Saved outputs/Streets_of_Nepal_Variance_Analysis.xlsx")
+ws4.column_dimensions["C"].width = 24
+ws4.column_dimensions["D"].width = 24
+
+output_path = OUTPUT_DIR / "Streets_of_Nepal_Variance_Analysis.xlsx"
+wb.save(output_path)
+print(f"Saved {output_path}")

@@ -1,0 +1,30 @@
+{
+  "Chicken Momos": {
+    "std_material_qty": 0.35,
+    "std_material_price": 3.8,
+    "std_labor_minutes": 6.0,
+    "std_labor_rate": 13.5,
+    "unit": "lb"
+  },
+  "Veg Thukpa": {
+    "std_material_qty": 0.6,
+    "std_material_price": 2.1,
+    "std_labor_minutes": 8.0,
+    "std_labor_rate": 13.5,
+    "unit": "lb"
+  },
+  "Chow Mein (Chicken)": {
+    "std_material_qty": 0.5,
+    "std_material_price": 3.2,
+    "std_labor_minutes": 7.0,
+    "std_labor_rate": 13.5,
+    "unit": "lb"
+  },
+  "Lamb Sekuwa": {
+    "std_material_qty": 0.45,
+    "std_material_price": 6.5,
+    "std_labor_minutes": 10.0,
+    "std_labor_rate": 14.5,
+    "unit": "lb"
+  }
+}

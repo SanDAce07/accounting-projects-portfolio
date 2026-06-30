@@ -24,7 +24,7 @@ Example: *To verify that all recorded revenue transactions in the period are sup
 | --- | --- |
 | Population | All [transaction type] from [start date] to [end date] |
 | Population size | [#] items / $[total] |
-| Sampling method | AICPA-guided random / judgmental / 100% |
+| Sampling method | Random / judgmental / systematic / 100%; document the governing methodology and assumptions |
 | Sample size | [#] items |
 | Materiality threshold | $ |
 | Performance materiality | $ |

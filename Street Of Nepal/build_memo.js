@@ -3,6 +3,10 @@ const { Document, Packer, Paragraph, TextRun, Table, TableRow, TableCell,
         TabStopType, TabStopPosition, HeadingLevel, BorderStyle, WidthType,
         ShadingType, PageNumber } = require("docx");
 const fs = require("fs");
+const path = require("path");
+
+const OUTPUT_DIR = path.join(__dirname, "outputs");
+fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 
 const FONT = "Arial";
 const border = { style: BorderStyle.SINGLE, size: 1, color: "CCCCCC" };
@@ -23,7 +27,7 @@ function cell(text, opts = {}) {
 }
 
 function para(text, opts = {}) {
-  const { bold = false, italics = false, size = 22, spacingAfter = 200, color } = opts;
+  const { bold = false, italics = false, size = 21, spacingAfter = 150, color } = opts;
   return new Paragraph({
     spacing: { after: spacingAfter },
     children: [new TextRun({ text, bold, italics, font: FONT, size, color })]
@@ -33,8 +37,8 @@ function para(text, opts = {}) {
 function bullet(text) {
   return new Paragraph({
     numbering: { reference: "bullets", level: 0 },
-    spacing: { after: 100 },
-    children: [new TextRun({ text, font: FONT, size: 22 })]
+    spacing: { after: 80 },
+    children: [new TextRun({ text, font: FONT, size: 21 })]
   });
 }
 
@@ -47,11 +51,11 @@ const doc = new Document({
     paragraphStyles: [
       { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
         run: { size: 30, bold: true, font: FONT, color: "1F3864" },
-        paragraph: { spacing: { before: 320, after: 180 }, outlineLevel: 0,
+        paragraph: { spacing: { before: 240, after: 130 }, outlineLevel: 0,
           border: { bottom: { style: BorderStyle.SINGLE, size: 6, color: "1F3864", space: 4 } } } },
       { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
         run: { size: 24, bold: true, font: FONT, color: "2E5395" },
-        paragraph: { spacing: { before: 240, after: 140 }, outlineLevel: 1 } },
+        paragraph: { spacing: { before: 180, after: 100 }, outlineLevel: 1 } },
     ]
   },
   numbering: {
@@ -65,7 +69,7 @@ const doc = new Document({
     properties: {
       page: {
         size: { width: 12240, height: 15840 },
-        margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 }
+        margin: { top: 1152, right: 1152, bottom: 1152, left: 1152 }
       }
     },
     headers: {
@@ -103,7 +107,7 @@ const doc = new Document({
         columnWidths: [1800, 7560],
         rows: [
           new TableRow({ children: [cell("To:", { bold: true, width: 1800 }), cell("Owner / Management, Streets of Nepal", { width: 7560 })] }),
-          new TableRow({ children: [cell("From:", { bold: true, width: 1800 }), cell("Sandesh Acharya, Internal Review", { width: 7560 })] }),
+          new TableRow({ children: [cell("From:", { bold: true, width: 1800 }), cell("Sandesh Lama Tamang, Internal Review", { width: 7560 })] }),
           new TableRow({ children: [cell("Date:", { bold: true, width: 1800 }), cell("May 1, 2026", { width: 7560 })] }),
           new TableRow({ children: [cell("Re:", { bold: true, width: 1800 }), cell("Standard Costing Variance Review — Findings and Recommendations for April 2026", { width: 7560 })] }),
         ]
@@ -112,7 +116,7 @@ const doc = new Document({
 
       // ---------------- PURPOSE AND SCOPE ----------------
       new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Purpose and Scope")] }),
-      para("This memo presents the results of a standard costing variance review covering Streets of Nepal\u2019s four signature dishes \u2014 Chicken Momos, Veg Thukpa, Chow Mein (Chicken), and Lamb Sekuwa \u2014 for the 26 operating days of April 2026. The review compares actual material and labor costs to management\u2019s established standard cost cards, calculates the resulting variances, and applies a set of statistical tests designed to distinguish ordinary operational variation from patterns that warrant further inquiry."),
+      para("This memo presents the results of a standard costing variance review covering Streets of Nepal\u2019s four signature dishes \u2014 Chicken Momos, Veg Thukpa, Chow Mein (Chicken), and Lamb Sekuwa \u2014 for the 26 operating days of April 2026. The review compares actual material and labor costs to management\u2019s established standard cost cards, calculates the resulting variances, and applies documented scenario heuristics to identify patterns that warrant further inquiry."),
       para("This review was performed because food cost control directly affects margin in a thin-margin restaurant operation, and because the kitchen manager\u2019s monthly bonus is tied to a favorable food cost variance result \u2014 a structure that, while common, creates an incentive worth testing for."),
 
       // ---------------- METHODOLOGY ----------------
@@ -122,10 +126,10 @@ const doc = new Document({
       bullet("Material Quantity Variance (MQV) = (Actual Quantity \u2212 Standard Quantity) \u00d7 Standard Price"),
       bullet("Labor Rate Variance (LRV) = (Actual Rate \u2212 Standard Rate) \u00d7 Actual Hours"),
       bullet("Labor Efficiency Variance (LEV) = (Actual Hours \u2212 Standard Hours) \u00d7 Standard Rate"),
-      para("Beyond the standard variance calculations, three statistical tests were applied to the underlying daily data to identify patterns inconsistent with normal kitchen operations: a price-clustering test (comparing the spread of actual prices to typical vendor price volatility), a labor-time consistency test (comparing day-to-day variability in recorded labor minutes across dishes), and a period-end shift test (comparing variance favorability in the days immediately preceding month-end review to the rest of the month). These tests do not prove manipulation occurred; they identify statistical patterns that are unlikely to arise from normal variation alone and that merit follow-up.", { spacingAfter: 280 }),
+      para("Beyond the standard variance calculations, three documented heuristics were applied to the synthetic daily data: a price-clustering test, a labor-time consistency comparison across dishes, and a period-end shift test. The thresholds are portfolio assumptions created for this scenario. They are not industry benchmarks or formal significance tests, and they do not prove manipulation; they identify patterns that should be traced to source documentation.", { spacingAfter: 220 }),
 
       // ---------------- SUMMARY OF RESULTS ----------------
-      new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Summary of Variance Results")] }),
+      new Paragraph({ pageBreakBefore: true, heading: HeadingLevel.HEADING_1, children: [new TextRun("Summary of Variance Results")] }),
       para("The company recorded a net favorable variance of approximately $119 for April, driven almost entirely by Chicken Momos. Viewed in isolation, this looks like a positive result. The detail below is less reassuring."),
 
       new Table({
@@ -190,30 +194,30 @@ const doc = new Document({
 
       new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Finding 1 \u2014 Material Price Variances Show Unusually Low Volatility (All Dishes)")] }),
       riskBadge("Medium"),
-      para("Actual material prices for all four dishes were favorable on 100% of operating days in April, with day-to-day variation far tighter than typical vendor price movement (coefficients of variation ranging from 0.36% to 1.14%, versus a typical 3\u20135% range for fresh produce and meat inputs). Real market prices fluctuate with supply, seasonality, and vendor-level negotiation; a pattern this smooth and uniformly favorable across all four unrelated ingredient categories is inconsistent with independently sourced vendor invoices and is more consistent with prices being estimated, smoothed, or entered from a single adjusted source rather than pulled directly from purchase records."),
+      para("Actual material prices for all four dishes were favorable on 100% of operating days in April, with coefficients of variation ranging from 0.36% to 1.14%. Under this project\u2019s documented 1.2% CV heuristic, the combination of low dispersion and uniformly favorable direction warrants tracing recorded prices to vendor invoices. The calculation alone cannot determine whether the cause is a contract price, a data-interface issue, manual smoothing, or another explanation."),
       para("Recommendation: Trace a sample of recorded \u201cactual\u201d material prices directly to vendor invoices and purchase orders for at least two weeks of the period. If invoice prices do not match the recorded actuals, this points to a data entry or system issue in how purchasing costs flow into the costing system \u2014 a control gap independent of any individual\u2019s intent.", { spacingAfter: 280 }),
 
       new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Finding 2 \u2014 Chicken Momos Labor Time Shows Implausibly Low Variability")] }),
       riskBadge("High"),
-      para("The day-to-day standard deviation of recorded labor minutes per order for Chicken Momos (0.30 minutes) is only 60% of the typical spread observed across the other three dishes (0.50\u20130.62 minutes), despite Momos being the highest-volume item and therefore the one most exposed to staffing and order-complexity fluctuation \u2014 if anything, its variability should be similar to or higher than the other dishes, not lower. This pattern is consistent with labor time being estimated after the fact, copy-pasted from a prior day\u2019s entry, or pre-filled to a target rather than recorded from an actual time clock or kitchen log in real time."),
+      para("The day-to-day standard deviation of recorded labor minutes per order for Chicken Momos (0.30 minutes) is 60% of the median spread across the four dishes. Under the project\u2019s cross-dish heuristic, that difference warrants validating how labor minutes were captured. Possible explanations include a stable production process, rounding, manual estimation, copied entries, or a system configuration issue; the calculation does not distinguish among them."),
       para("This finding is rated High because labor time is the input directly tied to the kitchen manager\u2019s bonus metric, and Chicken Momos is the dish where this pattern appears.", { spacingAfter: 200 }),
       para("Recommendation: Review the source of labor time data for Chicken Momos specifically \u2014 confirm whether minutes are captured via time clock/POS integration or manually entered by the kitchen manager. If manual, implement a system-captured alternative (e.g., ticket-time stamps already available in most POS systems) so labor minutes are recorded independently of the person whose bonus depends on them.", { spacingAfter: 280 }),
 
       new Paragraph({ heading: HeadingLevel.HEADING_2, children: [new TextRun("Finding 3 \u2014 Chicken Momos Variances Improve Sharply in the Final Days of the Month")] }),
       riskBadge("High"),
-      para("Average variance per order for Chicken Momos shifted from \u2212$0.118 (favorable) during days 1\u201323 to \u2212$0.306 (favorable) during days 24\u201326, a further improvement of $0.189 per order with no corresponding change on file in order volume, staffing levels, or ingredient sourcing. This timing \u2014 a sudden, unexplained improvement in the days immediately preceding month-end bonus calculation \u2014 is a recognized pattern in cases of period-end metric management, where reported results shift favorably right before a review date and then normalize the following period."),
+      para("Average variance per order for Chicken Momos shifted from \u2212$0.118 (favorable) during days 1\u201323 to \u2212$0.306 (favorable) during days 24\u201326, a further improvement of $0.189 per order. In this synthetic scenario, no corresponding staffing or sourcing change was provided. The timing supports follow-up, but one month of descriptive data is insufficient to establish intent or a recurring period-end pattern."),
       para("Recommendation: Compare this pattern against the same days in the prior 2\u20133 months. If the late-month improvement recurs every month, that is a stronger signal than a one-time event and should prompt a direct conversation with the kitchen manager about how late-month figures are recorded, plus consideration of moving the bonus calculation window so it does not align predictably with reporting cutoffs.", { spacingAfter: 280 }),
 
       // ---------------- OVERALL ASSESSMENT ----------------
       new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Overall Assessment")] }),
-      para("None of these findings are, on their own, proof of intentional manipulation \u2014 each could individually have an innocent explanation (a long-term vendor contract with locked-in pricing, a particularly efficient kitchen process for Momos, or a genuine productivity improvement late in the month). What makes this pattern worth escalating is that three independent statistical tests, applied without reference to any one dish in advance, all converge on the same item \u2014 the one tied to a bonus incentive \u2014 and the direction of every anomaly is favorable to that bonus. That convergence is the actual finding here, more than any single test in isolation."),
-      para("This memo does not conclude that manipulation occurred. It concludes that the data pattern is unlikely to have arisen from chance alone and that the source documentation underlying the Chicken Momos figures specifically should be verified before the April bonus is paid out."),
+      para("None of these findings proves intentional manipulation. Plausible explanations include contract pricing, a stable kitchen process, rounding, a system-interface issue, or genuine productivity improvement. The combined pattern increases the priority of verifying the underlying source records; it does not replace that verification."),
+      para("This memo concludes only that management should validate vendor prices, labor-time capture, and the late-month movement before relying on the reported variance for a compensation decision."),
 
       // ---------------- RECOMMENDATIONS SUMMARY ----------------
       new Paragraph({ heading: HeadingLevel.HEADING_1, children: [new TextRun("Recommendations Summary")] }),
       bullet("Trace a sample of recorded material prices to vendor invoices for all four dishes before relying on reported price variances."),
       bullet("Verify the source and method of labor time capture for Chicken Momos; move to a system-captured time source independent of the kitchen manager."),
-      bullet("Hold payment of the April kitchen manager bonus pending verification of the Chicken Momos labor and price source data."),
+      bullet("Management should determine whether to defer relying on the April variance for the bonus decision until the Chicken Momos labor and price source data is verified."),
       bullet("Review whether the bonus structure itself should be redesigned \u2014 for example, basing it on a metric less susceptible to single-point manual entry, or requiring secondary sign-off on the underlying data."),
       bullet("Repeat this variance and statistical review monthly so that any recurring late-month pattern becomes visible over time rather than being assessed one month at a time."),
 
@@ -234,6 +238,7 @@ function riskBadge(level) {
 }
 
 Packer.toBuffer(doc).then(buffer => {
-  fs.writeFileSync("outputs/Streets_of_Nepal_Audit_Memo.docx", buffer);
-  console.log("Saved outputs/Streets_of_Nepal_Audit_Memo.docx");
+  const outputPath = path.join(OUTPUT_DIR, "Streets_of_Nepal_Audit_Memo.docx");
+  fs.writeFileSync(outputPath, buffer);
+  console.log(`Saved ${outputPath}`);
 });

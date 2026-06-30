@@ -2,19 +2,24 @@
 Streets of Nepal - Standard Costing Variance Analysis Engine
 ==============================================================
 Calculates material price/quantity and labor rate/efficiency variances
-from daily actuals, then runs statistical tests to flag patterns that
-are consistent with possible data manipulation or control weaknesses
-(rather than ordinary operational variation).
+from daily actuals, then applies documented scenario heuristics to identify
+patterns that warrant source-document follow-up. The heuristics do not
+establish intent or statistical significance.
 
-Author: Sandesh Acharya
+Author: Sandesh Lama Tamang
 """
 
 import pandas as pd
 import numpy as np
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 pd.set_option("display.float_format", lambda x: f"{x:,.2f}")
 
-df = pd.read_csv("data/daily_actuals.csv")
+df = pd.read_csv(DATA_DIR / "daily_actuals.csv")
 
 # ------------------------------------------------------------------
 # 1. VARIANCE CALCULATIONS
@@ -40,7 +45,7 @@ df["LEV"] = (df["Actual_Labor_Hours_Total"] - df["Std_Labor_Hours_Total"]) * df[
 df["Total_Material_Variance"] = df["MPV"] + df["MQV"]
 df["Total_Labor_Variance"] = df["LRV"] + df["LEV"]
 
-df.to_csv("data/daily_variances.csv", index=False)
+df.to_csv(DATA_DIR / "daily_variances.csv", index=False)
 
 # ------------------------------------------------------------------
 # 2. MONTHLY SUMMARY BY DISH
@@ -75,11 +80,9 @@ print("=" * 70)
 flags = []
 
 # TEST A: Price variance "too clean" test
-# Real vendor price variation should show meaningful day-to-day spread.
-# We compare the coefficient of variation (CV) of actual price vs standard
-# price across days, by dish. An unusually low CV combined with a
-# consistently favorable direction suggests the price data may not
-# reflect genuine, independently-sourced vendor invoices.
+# This portfolio heuristic compares the coefficient of variation (CV) of
+# actual prices across days. The 1.2% threshold is a scenario assumption,
+# not an industry benchmark or a statistical-significance conclusion.
 print("\n--- TEST A: Material Price Variance Clustering ---")
 for dish in df["Dish"].unique():
     sub = df[df["Dish"] == dish]
@@ -94,9 +97,9 @@ for dish in df["Dish"].unique():
             "test": "Price Variance Clustering",
             "dish": dish,
             "detail": f"Coefficient of variation {cv:.4f} (unusually tight) with {pct_favorable_days:.0f}% "
-                      f"of days favorable, averaging {mean_pct_off_std:+.2f}% vs standard. Real market "
-                      f"prices typically show more day-to-day spread; this pattern is more consistent with "
-                      f"smoothed or pre-adjusted data than independently sourced vendor invoices.",
+                      f"of days favorable, averaging {mean_pct_off_std:+.2f}% vs standard. Under the "
+                      f"project's documented 1.2% CV heuristic, this combination warrants tracing recorded "
+                      f"prices to vendor invoices before the variance is relied upon.",
             "risk": "Medium",
         })
 
@@ -116,11 +119,10 @@ for dish, std_val in labor_std.items():
         flags.append({
             "test": "Labor Time Consistency",
             "dish": dish,
-            "detail": f"Day-to-day standard deviation of recorded labor minutes ({std_val:.3f}) is only "
-                      f"{ratio:.0%} of the typical spread seen in other dishes ({median_std:.3f}). Real "
-                      f"kitchen labor time fluctuates with order complexity, staffing, and volume; this "
-                      f"low variability suggests time entries may be estimated, copy-pasted, or pre-filled "
-                      f"rather than recorded in real time, which is a labor-tracking control weakness.",
+            "detail": f"Day-to-day standard deviation of recorded labor minutes ({std_val:.3f}) is "
+                      f"{ratio:.0%} of the median spread across the four dishes ({median_std:.3f}). Under "
+                      f"the project's cross-dish heuristic, the difference warrants validating the labor-time "
+                      f"capture method; the calculation alone does not identify the cause.",
             "risk": "High",
         })
 
@@ -147,9 +149,9 @@ for dish in df["Dish"].unique():
             "dish": dish,
             "detail": f"Average variance per order moved from ${early_avg_total_var_per_order:+.3f} during "
                       f"days 1-23 to ${late_avg_total_var_per_order:+.3f} during days 24-26, a shift of "
-                      f"${shift:+.3f} per order with no corresponding change in volume, staffing, or "
-                      f"ingredient sourcing on file. This timing, immediately preceding month-end "
-                      f"performance review, is consistent with period-end metric management.",
+                      f"${shift:+.3f} per order. In this synthetic scenario, no corresponding change in "
+                      f"staffing or ingredient sourcing was provided, so the movement warrants follow-up "
+                      f"rather than a conclusion about intent.",
             "risk": "High",
         })
 
@@ -157,7 +159,7 @@ for dish in df["Dish"].unique():
 # 4. SAVE FLAGS FOR MEMO
 # ------------------------------------------------------------------
 flags_df = pd.DataFrame(flags)
-flags_df.to_csv("data/red_flags.csv", index=False)
+flags_df.to_csv(DATA_DIR / "red_flags.csv", index=False)
 
 print("\n" + "=" * 70)
 print(f"TOTAL RED FLAGS IDENTIFIED: {len(flags)}")
@@ -166,5 +168,5 @@ for i, f in enumerate(flags, 1):
     print(f"\n{i}. [{f['risk']} RISK] {f['test']} - {f['dish']}")
     print(f"   {f['detail']}")
 
-summary.to_csv("data/monthly_summary.csv", index=False)
-print("\nSaved: data/daily_variances.csv, data/monthly_summary.csv, data/red_flags.csv")
+summary.to_csv(DATA_DIR / "monthly_summary.csv", index=False)
+print(f"\nSaved analysis outputs to {DATA_DIR}")

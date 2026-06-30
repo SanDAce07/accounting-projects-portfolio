@@ -27,23 +27,7 @@ Built in the [bank-reconciliation-analyzer](../accounts-receivable/bank-reconcil
 - Adjusted cash summary tying both sides to a common balance
 - Journal entry support for bank-only items
 
----
-
-### Planned: Month-End Close Tracker
-An Excel dashboard for tracking close tasks by day, owner, and status, with:
-- Color-coded status indicators (Not Started / In Progress / Complete)
-- Weighted completion % progress bar
-- Open items rollforward section
-
----
-
-### Planned: AP / AR KPI Dashboard
-A management-facing KPI dashboard including:
-- DSO (Days Sales Outstanding)
-- DPO (Days Payable Outstanding)
-- Collection effectiveness ratio
-- Overdue AR concentration chart
-- Period-over-period trend sparklines
+Future dashboard ideas are listed in the repository [roadmap](../ROADMAP.md).
 
 ---
 

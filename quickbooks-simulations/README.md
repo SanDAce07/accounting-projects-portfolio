@@ -1,10 +1,10 @@
-# QuickBooks Simulations
+# QuickBooks Workflow Guides
 
-Simulation-based projects covering QuickBooks-style accounting workflows including AR cycle management, bookkeeping, payroll support, and month-end close walkthroughs.
+Process documentation covering QuickBooks-style accounting workflows including AR cycle management, bookkeeping, payroll support, and month-end close. These guides support the completed Excel and audit projects; they are not presented as evidence of a completed QuickBooks company-file simulation.
 
 ## Projects
 
-### AR Cycle Simulation
+### AR Cycle Workflow
 A walkthrough of the end-to-end AR workflow in QuickBooks, covering:
 
 | Step | Action | QuickBooks Feature |
@@ -21,7 +21,7 @@ A walkthrough of the end-to-end AR workflow in QuickBooks, covering:
 
 ---
 
-### Month-End Close Workflow Simulation
+### Month-End Close Workflow
 A documented close sequence for a small business using QuickBooks, including:
 
 1. Reconcile all bank and credit card accounts
@@ -45,7 +45,7 @@ A bookkeeping exercise covering the full accounting cycle:
 
 ---
 
-## QuickBooks Skills Highlighted
+## Concepts Documented
 - Customer and vendor record management
 - Invoice creation and payment application
 - Bank reconciliation workflow
@@ -54,6 +54,10 @@ A bookkeeping exercise covering the full accounting cycle:
 - Period-end close procedures
 - Report customization and export
 
+## Evidence Status
+
+The next version will add screenshots and exported reports from a fully completed synthetic QuickBooks company file. Until then, this folder should be read as workflow documentation rather than a standalone software project. See the [portfolio roadmap](../ROADMAP.md).
+
 ## Related Work
-- [Bank Reconciliation Analyzer](../accounts-receivable/bank-reconciliation-analyzer/README.md)
+- [Bank Reconciliation Case Study](../accounts-receivable/bank-reconciliation-analyzer/README.md)
 - [Month-End Close Checklist](../templates/month-end-close-checklist.md)

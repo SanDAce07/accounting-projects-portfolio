@@ -1,5 +1,7 @@
 # Cash Application Tracker
 
+![Cash application dashboard preview](../../docs/previews/cash-application-tracker.png)
+
 A practical accounts receivable project that demonstrates how customer payments are matched, applied, researched, and reconciled to open invoices.
 
 ## Project Goal
