@@ -75,5 +75,5 @@ Excel model · docx (Node.js) for the formal Word memo.
 
 ## Author
 
-Sandesh Acharya — B.B.A. Accounting & Computer Information Systems, University of
+Sandesh Lama Tamang— B.B.A. Accounting & Computer Information Systems, University of
 Louisiana Monroe. Built as part of a GRC / IT audit-focused portfolio.
