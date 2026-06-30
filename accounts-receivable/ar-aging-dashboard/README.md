@@ -1,5 +1,7 @@
 # AR Aging Dashboard
 
+![AR Aging dashboard preview](../../docs/previews/ar-aging-dashboard.png)
+
 An accounts receivable project designed to show practical skills in invoice tracking, aging analysis, customer concentration review, and management reporting.
 
 ## Project Goal

@@ -18,37 +18,7 @@ A completed accounts receivable confirmation workpaper package that includes:
 
 ---
 
-## Planned Projects
-
-### Internal Controls Matrix
-A risk-and-control matrix covering key process areas:
-
-| Process | Key Risks | Controls | Test Approach |
-| --- | --- | --- | --- |
-| Revenue / AR | Fictitious revenue, misapplied cash | Approval authorization, aging review | Inspect + re-perform |
-| Cash | Fraud, misstatement | Bank recon, dual approval | Inspect + observe |
-| Payroll | Ghost employees, unauthorized changes | HR authorization, register review | Inspect + trace |
-| IT General Controls | Unauthorized access, SOD failures | Access reviews, change management | Inspect + inquiry |
-
----
-
-### Substantive Testing Support Files
-Sample testing schedules for revenue and expense testing, including:
-- Population selection criteria
-- Documented sampling method and scope
-- Tickmark legend
-- Exception documentation format
-
----
-
-### Audit Workpaper Set
-A set of workpapers covering:
-- Lead schedule tied to trial balance
-- Account reconciliation support
-- Analytical procedures and flux commentary
-- Management representation support
-
----
+Future additions are listed in the repository [roadmap](../ROADMAP.md).
 
 ## Related Work
 - [Audit Workpaper Template](../templates/audit-workpaper-template.md)

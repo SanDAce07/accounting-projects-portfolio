@@ -1,4 +1,6 @@
-# Bank Reconciliation Analyzer
+# Bank Reconciliation Case Study
+
+![Bank reconciliation summary preview](../../docs/previews/bank-reconciliation.png)
 
 A practical bank reconciliation example for month-end close that demonstrates matching bank statement activity to book cash records, identifying reconciling items, and producing clear documentation.
 
@@ -15,7 +17,6 @@ A practical bank reconciliation example for month-end close that demonstrates ma
 - [What to look for / common reconciling items](#what-to-look-for--common-reconciling-items)
 - [Privacy & data handling](#privacy--data-handling)
 - [Contributing / Contact](#contributing--contact)
-- [License](#license)
 
 ## Project Goal
 Demonstrate the ability to:
@@ -41,7 +42,7 @@ This project simulates reconciliation of a company's cash ledger to a bank state
 ## Files In This Project
 - [`sample_book_transactions.csv`](sample_book_transactions.csv) — book-side transactions used for reconciliation
 - [`sample_bank_statement.csv`](sample_bank_statement.csv) — bank statement activity for the period
-- [`matched_transactions.csv`](matched_transactions.csv) — result of automated/manual matching
+- [`matched_transactions.csv`](matched_transactions.csv) — completed matching schedule for the case study
 - [`reconciling_items.csv`](reconciling_items.csv) — outstanding items and bank-only items
 - [`adjusted_cash_summary.md`](adjusted_cash_summary.md) — summary of the adjusted cash balance
 - [`journal_entries.md`](journal_entries.md) — suggested journal entries for book updates
@@ -66,7 +67,7 @@ Note: If your book uses separate debit/credit columns, convert to a single signe
 1. Open [`bank-reconciliation-workbook.xlsx`](bank-reconciliation-workbook.xlsx) in Excel:
    - Import [`sample_book_transactions.csv`](sample_book_transactions.csv) to the Book sheet.
    - Import [`sample_bank_statement.csv`](sample_bank_statement.csv) to the Bank sheet.
-2. Run the workbook's matching sheet (if formulas/macros are present) or:
+2. Review the completed matching sheet, then reproduce the matching logic using the source CSV files:
    - Sort both datasets by date and amount.
    - Perform automatic matching on exact date + amount.
    - Flag near-matches or duplicates for manual review.
@@ -75,9 +76,7 @@ Note: If your book uses separate debit/credit columns, convert to a single signe
 4. Prepare journal entries for book-side adjustments (see [`journal_entries.md`](journal_entries.md)).
 5. Produce the adjusted cash summary and document the reconciliation in [`reconciliation-notes.md`](reconciliation-notes.md).
 
-Optional: Automate with Python
-- Use pandas to read CSVs and merge on `date` and `amount` (or use nearest-date matching with tolerance).
-- Example idea (not provided as a script here): left-join book to bank on (date, amount) and mark matches/unmatched.
+The included workbook is a completed case study rather than an automated matching application. A future automation enhancement is listed in the repository roadmap.
 
 ## How matching works (summary)
 - Primary match: exact match on date and amount.
@@ -105,7 +104,4 @@ Optional: Automate with Python
 
 ## Contributing / Contact
 - To propose improvements (scripts, automation, additional checks), open an issue or submit a pull request.
-- Author / maintainer: SanDAce07 (see repo contact or GitHub profile)
-
-## License
-This project is provided under the repository's [MIT License](../../LICENSE).
+- Author / maintainer: Sandesh Lama Tamang ([SanDAce07](https://github.com/SanDAce07))

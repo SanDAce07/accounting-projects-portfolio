@@ -21,5 +21,5 @@ Each template is a standalone markdown file. Download or copy the file, fill in 
 
 ## Related Work
 - [AR Aging Dashboard](../accounts-receivable/ar-aging-dashboard/README.md)
-- [Bank Reconciliation Analyzer](../accounts-receivable/bank-reconciliation-analyzer/README.md)
+- [Bank Reconciliation Case Study](../accounts-receivable/bank-reconciliation-analyzer/README.md)
 - [GRC & IT Audit Toolkit](https://github.com/SanDAce07/grc-audit-toolkit)

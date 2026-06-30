@@ -1,13 +1,23 @@
-# Accounting Projects Portfolio
+# Accounting & Audit Projects Portfolio
 
-A portfolio of accounting, audit, and accounting systems projects built around my background as a **CPA-track Accounting and Computer Information Systems double major** at the **University of Louisiana Monroe**.
+Recruiter-ready accounting, audit, Excel, and data-analysis projects by **Sandesh Lama Tamang**, a CPA-track Accounting and Computer Information Systems double major at the **University of Louisiana Monroe**.
+
+## Start Here
+
+| Project | What it demonstrates | Key result |
+|---|---|---|
+| [AR Confirmation Simulation](./audit-projects/ar-confirmation-simulation/README.md) | Audit sampling, confirmations, alternative procedures, and exception evaluation | Tested 65.7% of positive AR exposure with documented control checks |
+| [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md) | Formula-driven aging, concentration analysis, and management reporting | Analyzed $313,975 of positive receivable exposure |
+| [Cash Application Tracker](./accounts-receivable/cash-application-tracker/README.md) | Receipt matching, partial payments, and unapplied-cash controls | Reconciled $259,480 of receipts with a 90.2% application rate |
+| [SQL Financial Analysis](./sql-financial-analysis/README.md) | PostgreSQL accounting schema, analytical queries, and validation tests | Reconciles invoice, receipt, and open-balance logic through automated checks |
+| [Streets of Nepal Variance Review](./Street%20Of%20Nepal/README.md) | Cost accounting, live Excel formulas, and controls-focused follow-up | Explains a $118.83 favorable net variance and six follow-up indicators |
 
 This repository is where I am building projects that show practical skills in:
 - accounts receivable and accounts payable workflows
 - account reconciliation and month-end close support
 - audit documentation and testing procedures
 - Excel-based financial analysis and dashboards
-- QuickBooks simulations and accounting system workflows
+- QuickBooks workflow documentation
 - SQL and data analysis for accounting use cases
 - internal controls, GRC, and IT-audit-adjacent work
 
@@ -20,8 +30,8 @@ These areas are drawn directly from my coursework, resume experience, and curren
 
 - [Accounts Receivable Projects](./accounts-receivable/README.md)
   Focused on invoicing, aging analysis, cash application, and reconciliation workflows.
-- [QuickBooks Simulations](./quickbooks-simulations/README.md)
-  Simulations of AR, bookkeeping, and accounting cycle workflows in QuickBooks.
+- [QuickBooks Workflow Guides](./quickbooks-simulations/README.md)
+  Process documentation for AR, bookkeeping, and accounting cycle workflows.
 - [Audit Projects](./audit-projects/README.md)
   Workpapers, audit simulations, internal control reviews, and testing support materials.
 - [SQL Financial Analysis](./sql-financial-analysis/README.md)
@@ -35,18 +45,14 @@ These areas are drawn directly from my coursework, resume experience, and curren
 
 - [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md) — Formula-driven aging, exception, concentration, and management-reporting workbook.
 - [Cash Application Tracker](./accounts-receivable/cash-application-tracker/README.md) — Receipt matching, partial payments, unapplied cash, and reconciliation controls.
-- [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md) — Book-to-bank matching, reconciling items, and required journal entries.
+- [Bank Reconciliation Case Study](./accounts-receivable/bank-reconciliation-analyzer/README.md) — Book-to-bank matching, reconciling items, and required journal entries.
 - [AR Confirmation Simulation](./audit-projects/ar-confirmation-simulation/README.md) — Auditor-controlled confirmations, alternative procedures, and exception evaluation.
 - [SQL Financial Analysis](./sql-financial-analysis/README.md) — PostgreSQL schema, accounting data, analytical queries, and validation controls.
-- [QuickBooks Workflow Simulations](./quickbooks-simulations/README.md) — Documented AR, bookkeeping, and month-end close walkthroughs.
+- [Streets of Nepal Variance Review](./Street%20Of%20Nepal/README.md) — Reproducible standard-cost variance model with documented control follow-up.
+- [QuickBooks Workflow Guides](./quickbooks-simulations/README.md) — Process documentation supporting the completed accounting workbooks.
 - [Accounting and Audit Templates](./templates/README.md) — Reusable reconciliation, close, control, and workpaper templates.
 
-## Planned Projects
-
-- Customer balance reconciliation and collections follow-up log
-- Internal controls matrix and revenue/expense testing workpapers
-- Audit sampling tool
-- AP/AR KPI dashboard, cash-flow dashboard, and month-end close tracker
+Future project ideas are tracked separately in [ROADMAP.md](./ROADMAP.md) so this landing page stays focused on completed evidence.
 
 ## Linked Work In Other Repositories
 - [GRC & IT Audit Toolkit](https://github.com/SanDAce07/grc-audit-toolkit)
@@ -68,9 +74,6 @@ These areas are drawn directly from my coursework, resume experience, and curren
 - Financial analysis
 - Accounting information systems
 
-## Long-Term Goal
-This repository will grow into a focused accounting and CPA-track portfolio that shows both technical and business-side skills through practical, recruiter-friendly projects.
+## About the Data
 
-## License
-
-This repository is available under the [MIT License](./LICENSE).
+All client, customer, employee, restaurant, and transaction data in this repository is synthetic and created for educational portfolio use.

@@ -1,0 +1,12 @@
+{
+  "name": "streets-of-nepal-audit-memo",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Generates the synthetic Streets of Nepal internal audit memo.",
+  "scripts": {
+    "build:memo": "node build_memo.js"
+  },
+  "dependencies": {
+    "docx": "^9.6.1"
+  }
+}
