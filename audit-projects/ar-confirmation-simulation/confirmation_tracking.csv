@@ -1,0 +1,6 @@
+confirmation_id,customer,date_sent,response_status,response_date,customer_stated_balance,follow_up_date,alternative_procedures_required,management_explanation
+CONF-001,Gulf Coast Manufacturing,2026-07-01,Received,2026-07-06,59200.00,,No,Customer agreed to the recorded balance
+CONF-002,Delta Municipal Services,2026-07-01,No Response,,,2026-07-07,Yes,No response after follow-up; alternative procedures performed
+CONF-003,Acadia Health Partners,2026-07-01,Received,2026-07-09,38250.00,,No,Customer reported a 2400 service-level credit memo not recorded at period end
+CONF-004,Bayou Industrial Supply,2026-07-01,Received,2026-07-05,31750.00,,No,Customer agreed to the recorded balance
+CONF-005,Jefferson Community Care,2026-07-01,No Response,,,2026-07-07,Yes,No response after follow-up; invoice and service-acceptance support inspected

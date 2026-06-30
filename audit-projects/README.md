@@ -2,17 +2,23 @@
 
 Accounting and audit projects covering workpaper documentation, internal controls review, substantive testing support, and audit simulation exercises.
 
-## Projects
+## Active Projects
 
-### AR Confirmation Simulation
-A simulation of the accounts receivable confirmation process used in financial statement audits, including:
-- Positive confirmation requests drafted for overdue balances
-- Confirmation tracking log for responses and follow-ups
-- Management of non-responses and alternative procedures
+### [AR Confirmation Simulation](./ar-confirmation-simulation/README.md)
+A completed accounts receivable confirmation workpaper package that includes:
+- a formula-driven Excel audit workpaper with all control checks passing
+- five positive confirmation requests in a professional letter packet
+- a judgmental sample covering 65.7% of positive AR exposure
+- confirmation response and follow-up tracking
+- alternative procedures for two nonresponses
+- evaluation of one $2,400 confirmation exception
+- reusable synthetic CSV source files
 
 **Skills:** AR confirmations, audit evidence, OTC controls, substantive testing
 
 ---
+
+## Planned Projects
 
 ### Internal Controls Matrix
 A risk-and-control matrix covering key process areas:
@@ -29,7 +35,7 @@ A risk-and-control matrix covering key process areas:
 ### Substantive Testing Support Files
 Sample testing schedules for revenue and expense testing, including:
 - Population selection criteria
-- Sample sizes per AICPA guidance
+- Documented sampling method and scope
 - Tickmark legend
 - Exception documentation format
 

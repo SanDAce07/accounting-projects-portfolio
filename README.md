@@ -35,6 +35,7 @@ These projects are drawn directly from my coursework, resume experience, and cur
 ## Featured Projects Built In This Repository
 - [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md)
 - [Cash Application Tracker](./accounts-receivable/cash-application-tracker/README.md)
+- [AR Confirmation Simulation](./audit-projects/ar-confirmation-simulation/README.md)
 - [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md)
 
 ## Current and Planned Projects
@@ -61,8 +62,8 @@ See: [quickbooks-simulations](./quickbooks-simulations/README.md)
 
 ### Audit Projects
 See: [audit-projects](./audit-projects/README.md)
-- **Audit Simulation Workpapers**
-  Build sample workpapers for vouching, tracing, analytics, and account testing.
+- [AR Confirmation Simulation](./audit-projects/ar-confirmation-simulation/README.md)
+  Select a risk-based AR sample, prepare positive confirmation requests, track responses, perform alternative procedures, and evaluate exceptions.
 - **Internal Controls Matrix**
   Map key risks, controls, control owners, and test approaches by process area.
 - **Revenue and Expense Testing Project**
