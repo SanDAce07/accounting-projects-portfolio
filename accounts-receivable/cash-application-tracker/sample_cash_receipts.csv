@@ -1,0 +1,13 @@
+payment_id,receipt_date,customer,payment_amount,payment_method,bank_reference,remittance_received,remittance_invoice,receipt_notes
+PMT-2001,2026-06-02,Acadia Health Partners,18250.00,ACH,ACH-90021,Yes,INV-1001,Exact payment
+PMT-2002,2026-06-05,Bayou Industrial Supply,31750.00,Wire,WIRE-77104,Yes,INV-1003,Exact payment
+PMT-2003,2026-06-08,Crescent Retail Group,9500.00,Credit Card,CC-44812,Yes,INV-1004,Short pay pending customer confirmation
+PMT-2004,2026-06-10,Delta Municipal Services,48120.00,ACH,ACH-90088,Yes,INV-1005,Exact payment
+PMT-2005,2026-06-12,Evergreen Medical Labs,10000.00,Check,CHK-88341,Yes,INV-1006,Partial payment
+PMT-2006,2026-06-15,Frontier Logistics,12500.00,Wire,WIRE-77220,Yes,INV-1007,Exact payment
+PMT-2007,2026-06-18,Gulf Coast Manufacturing,60000.00,ACH,ACH-90176,Yes,INV-1008,Overpayment creates unapplied cash
+PMT-2008,2026-06-20,Harbor Energy Co.,8800.00,Credit Card,CC-45002,Yes,INV-1009,Exact payment
+PMT-2009,2026-06-22,Ivory Tech Consulting,17110.00,Check,CHK-88409,No,,Missing remittance advice
+PMT-2010,2026-06-25,Acadia Health Partners,25000.00,ACH,ACH-90251,Yes,INV-1002,Overpayment creates unapplied cash
+PMT-2011,2026-06-26,North Delta Equipment,13450.00,ACH,ACH-90266,Yes,INV-1015,Exact payment
+PMT-2012,2026-06-28,Unidentified Customer,5000.00,Wire,WIRE-77401,No,,Unidentified deposit requires research

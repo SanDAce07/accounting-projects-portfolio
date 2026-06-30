@@ -1,0 +1,13 @@
+invoice_number,customer,invoice_date,due_date,original_amount,payment_terms,reference
+INV-1001,Acadia Health Partners,2026-03-15,2026-04-14,18250.00,Net 30,PO-AHP-4102
+INV-1002,Acadia Health Partners,2026-02-08,2026-03-10,22400.00,Net 30,PO-AHP-3988
+INV-1003,Bayou Industrial Supply,2026-01-05,2026-02-04,31750.00,Net 30,PO-BIS-7751
+INV-1004,Crescent Retail Group,2026-05-20,2026-06-19,9600.00,Net 30,PO-CRG-2217
+INV-1005,Delta Municipal Services,2025-12-20,2026-01-19,48120.00,Net 30,PO-DMS-8804
+INV-1006,Evergreen Medical Labs,2026-04-11,2026-05-11,14220.00,Net 30,PO-EML-5630
+INV-1007,Frontier Logistics,2026-03-31,2026-04-30,12500.00,Net 30,PO-FLG-1189
+INV-1008,Gulf Coast Manufacturing,2025-11-18,2025-12-18,59200.00,Net 30,PO-GCM-9074
+INV-1009,Harbor Energy Co.,2026-05-08,2026-06-07,8800.00,Net 30,PO-HEC-6401
+INV-1010,Ivory Tech Consulting,2026-02-01,2026-03-03,17110.00,Net 30,PO-ITC-3308
+INV-1011,Jefferson Community Care,2025-12-30,2026-01-29,26500.00,Net 30,PO-JCC-7292
+INV-1015,North Delta Equipment,2026-05-12,2026-06-11,13450.00,Net 30,PO-NDE-4516
