@@ -1,0 +1,43 @@
+name: SQL validation
+
+on:
+  push:
+    paths:
+      - "sql-financial-analysis/**"
+      - ".github/workflows/sql-validation.yml"
+  pull_request:
+    paths:
+      - "sql-financial-analysis/**"
+      - ".github/workflows/sql-validation.yml"
+
+jobs:
+  validate-postgresql-project:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: accounting_portfolio
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    env:
+      PGHOST: localhost
+      PGPORT: 5432
+      PGUSER: postgres
+      PGPASSWORD: postgres
+      PGDATABASE: accounting_portfolio
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Load schema, sample data, and analytical queries
+        run: psql --set ON_ERROR_STOP=1 --file sql-financial-analysis/schema-and-queries.sql
+      - name: Run accounting control assertions
+        run: psql --set ON_ERROR_STOP=1 --file sql-financial-analysis/validation-tests.sql
