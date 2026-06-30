@@ -1,0 +1,11 @@
+application_id,payment_id,invoice_number,amount_applied,application_date,match_type,analyst_notes
+APP-3001,PMT-2001,INV-1001,18250.00,2026-06-02,Exact,Invoice and amount match remittance
+APP-3002,PMT-2002,INV-1003,31750.00,2026-06-05,Exact,Invoice and amount match remittance
+APP-3003,PMT-2003,INV-1004,9500.00,2026-06-08,Short Pay,Applied receipt with 100 dollar invoice balance remaining
+APP-3004,PMT-2004,INV-1005,48120.00,2026-06-10,Exact,Invoice and amount match remittance
+APP-3005,PMT-2005,INV-1006,10000.00,2026-06-12,Partial,Partial payment applied to open invoice
+APP-3006,PMT-2006,INV-1007,12500.00,2026-06-15,Exact,Invoice and amount match remittance
+APP-3007,PMT-2007,INV-1008,59200.00,2026-06-18,Overpayment,Applied invoice balance and retained 800 dollars as unapplied cash
+APP-3008,PMT-2008,INV-1009,8800.00,2026-06-20,Exact,Invoice and amount match remittance
+APP-3009,PMT-2010,INV-1002,22400.00,2026-06-25,Overpayment,Applied invoice balance and retained 2600 dollars as unapplied cash
+APP-3010,PMT-2011,INV-1015,13450.00,2026-06-26,Exact,Invoice and amount match remittance

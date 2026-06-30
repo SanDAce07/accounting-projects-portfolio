@@ -34,6 +34,7 @@ These projects are drawn directly from my coursework, resume experience, and cur
 
 ## Featured Projects Built In This Repository
 - [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md)
+- [Cash Application Tracker](./accounts-receivable/cash-application-tracker/README.md)
 - [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md)
 
 ## Current and Planned Projects
@@ -42,8 +43,8 @@ These projects are drawn directly from my coursework, resume experience, and cur
 See: [accounts-receivable](./accounts-receivable/README.md)
 - [AR Aging Dashboard](./accounts-receivable/ar-aging-dashboard/README.md)
   Build an Excel-based aging tracker with 0-30, 31-60, 61-90, and 90+ buckets, summary pivots, and reporting visuals.
-- **Cash Application Tracker**
-  Track customer invoices, payments, credits, and unapplied cash scenarios.
+- [Cash Application Tracker](./accounts-receivable/cash-application-tracker/README.md)
+  Apply customer receipts to invoices and investigate short pays, partial payments, overpayments, missing remittance, and unapplied cash.
 - **Customer Balance Reconciliation Project**
   Reconcile subledger balances against summary control totals and supporting records.
 - [Bank Reconciliation Analyzer](./accounts-receivable/bank-reconciliation-analyzer/README.md)
