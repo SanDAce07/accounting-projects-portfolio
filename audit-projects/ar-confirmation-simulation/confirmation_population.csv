@@ -1,0 +1,15 @@
+rank,customer,invoice_count,total_balance,overdue_balance,balance_61_90,balance_90_plus,max_days_past_due,risk_rating,selected,selection_rationale
+1,Gulf Coast Manufacturing,1,59200.00,59200.00,0.00,59200.00,194,High,Yes,Largest positive balance and entirely 90+ days past due
+2,Delta Municipal Services,1,48120.00,48120.00,0.00,48120.00,162,High,Yes,Second-largest balance and entirely 90+ days past due
+3,Acadia Health Partners,2,40650.00,40650.00,18250.00,22400.00,112,High,Yes,Multiple overdue invoices across aged buckets
+4,Bayou Industrial Supply,1,31750.00,31750.00,0.00,31750.00,146,High,Yes,Fourth-largest balance and entirely 90+ days past due
+5,Jefferson Community Care,1,26500.00,26500.00,0.00,26500.00,152,High,Yes,Fifth-largest balance and entirely 90+ days past due
+6,Orchid Wholesale,1,20875.00,20875.00,0.00,20875.00,125,High,No,Not selected after target coverage was achieved
+7,Ivory Tech Consulting,1,17110.00,17110.00,0.00,17110.00,119,High,No,Not selected after target coverage was achieved
+8,Evergreen Medical Labs,1,14220.00,14220.00,0.00,0.00,50,Medium,No,Lower balance and aging risk than selected items
+9,North Delta Equipment,1,13450.00,13450.00,0.00,0.00,19,Low,No,Recent overdue balance below selection threshold
+10,Frontier Logistics,1,12500.00,12500.00,12500.00,0.00,61,Medium,No,Lower balance and aging risk than selected items
+11,Lafayette Public Works,1,11200.00,0.00,0.00,0.00,,High,No,Missing due date retained as a population data-quality item
+12,Crescent Retail Group,1,9600.00,9600.00,0.00,0.00,11,Low,No,Recent overdue balance below selection threshold
+13,Harbor Energy Co.,1,8800.00,8800.00,0.00,0.00,23,Low,No,Recent overdue balance below selection threshold
+14,Keystone Distribution,1,-2400.00,0.00,-2400.00,0.00,72,High,No,Credit balance excluded from positive confirmation sampling frame

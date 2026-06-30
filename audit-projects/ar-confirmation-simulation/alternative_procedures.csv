@@ -1,0 +1,3 @@
+alt_proc_id,confirmation_id,customer,procedure_date,invoice_support,delivery_or_acceptance_support,subsequent_cash_date,subsequent_cash_amount,bank_reference,procedure_conclusion,auditor_notes
+ALT-001,CONF-002,Delta Municipal Services,2026-07-09,Yes,Yes,2026-07-08,48120.00,ACH-20260708-48120,Supported,Agreed the full balance to subsequent cash receipt and bank reference
+ALT-002,CONF-005,Jefferson Community Care,2026-07-10,Yes,Yes,,0.00,,Supported,Inspected invoice and customer service-acceptance documentation; no subsequent cash received by test date
