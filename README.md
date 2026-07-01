@@ -1,5 +1,7 @@
 # Accounting & Audit Projects Portfolio
 
+[![SQL validation](https://github.com/SanDAce07/accounting-projects-portfolio/actions/workflows/sql-validation.yml/badge.svg)](https://github.com/SanDAce07/accounting-projects-portfolio/actions/workflows/sql-validation.yml)
+
 Recruiter-ready accounting, audit, Excel, and data-analysis projects by **Sandesh Lama Tamang**, a CPA-track Accounting and Computer Information Systems double major at the **University of Louisiana Monroe**.
 
 ## Start Here
